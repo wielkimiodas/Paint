@@ -1,0 +1,34 @@
+Laboratorium #7: Paint
+
+
+Celem zadania jest napisanie w jêzyku C# (technologia WinForms lub Wpf)
+aplikacji umo¿liwiaj¹cej tworzenie prostej grafiki w oparciu o dostêpne
+narzêdzia. Ponadto, aplikacja powinna cechowaæ siê otwart¹ architektur¹,
+pozwalaj¹c¹ na dynamiczne ³adowanie wtyczek (plugin-ów) zwiêkszaj¹cych
+funkcjonalnoœæ programu.
+
+Uwagi dotycz¹ce projektu i implementacji programu:
+
+- interfejs u¿ytkownka powinien byæ maksymalnie czytelny i intuicyjny
+  (bli¿sze informacje na zajêciach) i wykorzystywaæ menu, paski narzêdziowe
+  (toolbary) oraz pasek statusowy
+
+- lista dostêpnych narzêdzi powinna umo¿liwiaæ rysowanie podstawowych figur
+  (linii prostych, prostok¹tów, elipsów) z uwzglêdnieniem ich atrybutów
+  (kolor linii, gruboœæ linii, styl linii, styl oraz kolor wype³nienia)
+
+- program powinien umo¿liwiaæ odczyt/zapis tworzonego rysunku w dowolnie
+  wybranym lub stworzonym formacie
+
+- dynamicznie ³adowane wtyczki (mechanizm Refleksji) powinny integrowaæ
+  siê z GUI aplikacji (menu, toolbary, okno opcji) i wykonywaæ operacje
+  na ca³ym obrazie (np. transformacje, konwersje kolorów)
+
+- aplikacja powinna obs³ugiwaæ mechanizm undo/redo oraz umo¿liwiaæ
+  dynamiczn¹ zmianê wersji jêzykowej (opcjonalnie)
+  
+- operacje d³ugotrwa³e (np. na ca³ym obrazie) powinny byæ realizowane
+  w osobnych w¹tkach, aby nie powodowa³y zak³óceñ w funkcjonowaniu
+  interfejsu u¿ytkownika
+
+Inne szczegó³y dotycz¹ce wymagañ zostan¹ podane na zajêciach!
