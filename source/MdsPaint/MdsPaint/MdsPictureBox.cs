@@ -19,7 +19,7 @@ namespace MdsPaint
         {
             base.OnPaint(e);
             var rc = new Rectangle(this.ClientSize.Width - grab, this.ClientSize.Height - grab, grab, grab);
-            ControlPaint.DrawSizeGrip(e.Graphics, this.BackColor, rc);
+            //ControlPaint.DrawSizeGrip(e.Graphics, this.BackColor, rc);
         }
         protected override void WndProc(ref Message m)
         {
@@ -36,8 +36,9 @@ namespace MdsPaint
         public void FixPictureBoxSize()
         {
             var pictureBoxSize = Size;
-            var bmp = new Bitmap(Image, pictureBoxSize);
-            Image = bmp;
+            //var bmp = new Bitmap(Image, pictureBoxSize);
+            //Image = bmp;
+
         }
     }
 

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +20,9 @@ namespace MdsPaint
 
         public static void SaveBmpFile(PictureBox img, string path)
         {
-            img.Image.Save(path);
+            var currImage = new Bitmap(img.Image, img.Size);
+            currImage.Save(path);
+            //img.Image.Save(path);
         }
 
         public static string GetNewFilePath()
@@ -38,15 +39,17 @@ namespace MdsPaint
             if (!string.IsNullOrEmpty(path))
             {
 
-                Bitmap bmp = new Bitmap(path);
-                form.pbPaintingArea.Image = bmp;
-                //Graphics gr = Graphics.FromImage(form.pbPaintingArea.Image);
+                //Bitmap bmp = new Bitmap(path);
+                //Graphics gr = Graphics.FromImage(bmp);
                 //Pen p = new Pen(Color.Red);
                 //p.Width = 5.0f;
                 //gr.DrawRectangle(p, 1, 2, 30, 40);
-                form.pbPaintingArea.Image = bmp;
-                form.pbPaintingArea.Size = bmp.Size;
+                var img = Image.FromFile(path);
+                form.pbPaintingArea.Image = img;
+                form.pbPaintingArea.Size = img.Size;
             }
         }
+
+        
     }
 }

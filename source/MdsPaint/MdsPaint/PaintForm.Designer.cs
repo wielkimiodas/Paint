@@ -83,6 +83,7 @@
             this.ribbonButton1.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButton1.Image")));
             this.ribbonButton1.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton1.SmallImage")));
             this.ribbonButton1.Text = "ribbonButton1";
+            this.ribbonButton1.Click += new System.EventHandler(this.ribbonButton1_Click);
             // 
             // ribbonTabActions
             // 
@@ -144,7 +145,7 @@
             // 
             // pbPaintingArea
             // 
-            this.pbPaintingArea.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.pbPaintingArea.BackColor = System.Drawing.Color.White;
             this.pbPaintingArea.Location = new System.Drawing.Point(12, 161);
             this.pbPaintingArea.Name = "pbPaintingArea";
             this.pbPaintingArea.Size = new System.Drawing.Size(433, 256);

@@ -47,5 +47,18 @@ namespace MdsPaint
             pbPaintingArea.FixPictureBoxSize();
         }
 
+        private void ribbonButton1_Click(object sender, EventArgs e)
+        {
+            Test();
+        }
+
+        private void Test()
+        {
+            var g = pbPaintingArea.CreateGraphics();
+            Bitmap bmp = new Bitmap(pbPaintingArea.Width,pbPaintingArea.Height);
+            pbPaintingArea.DrawToBitmap(bmp,new Rectangle(0,0,bmp.Width,bmp.Height));
+            bmp.Save(@"C:\Users\Wojciech\Desktop\bmp.bmp");
+        }
+
     }
 }
