@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MdsPaint", "MdsPaint\MdsPaint.csproj", "{778EC467-5850-4330-8285-8CBF5946A0FF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MdsPaintUnitTest", "MdsPaintUnitTest\MdsPaintUnitTest.csproj", "{BED3144A-DF23-403F-935A-4C5A00F224B6}"
