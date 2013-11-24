@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace MdsPaint
+namespace MdsPaint.View
 {
     partial class PaintForm
     {
@@ -32,21 +32,22 @@ namespace MdsPaint
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PaintForm));
             this.ribbon = new System.Windows.Forms.Ribbon();
+            this.ribbonOrbMenuItemNew = new System.Windows.Forms.RibbonOrbMenuItem();
+            this.ribbonOrbMenuItemSave = new System.Windows.Forms.RibbonOrbMenuItem();
+            this.ribbonOrbMenuItemExit = new System.Windows.Forms.RibbonOrbMenuItem();
             this.ribbonTabPlugins = new System.Windows.Forms.RibbonTab();
             this.ribbonPanelPlugins = new System.Windows.Forms.RibbonPanel();
             this.ribbonButtonPlugins = new System.Windows.Forms.RibbonButton();
             this.ribbonTabActions = new System.Windows.Forms.RibbonTab();
             this.ribbonPanelFileActions = new System.Windows.Forms.RibbonPanel();
+            this.rbtSaveFile = new System.Windows.Forms.RibbonButton();
             this.rbtLoadFile = new System.Windows.Forms.RibbonButton();
             this.ribbonButton2 = new System.Windows.Forms.RibbonButton();
-            this.rbtSaveFile = new System.Windows.Forms.RibbonButton();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLocationLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.pbPaintingArea = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.paintingArea = new System.Windows.Forms.Panel();
             this.statusStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // ribbon
@@ -60,8 +61,11 @@ namespace MdsPaint
             // 
             this.ribbon.OrbDropDown.BorderRoundness = 8;
             this.ribbon.OrbDropDown.Location = new System.Drawing.Point(0, 0);
+            this.ribbon.OrbDropDown.MenuItems.Add(this.ribbonOrbMenuItemNew);
+            this.ribbon.OrbDropDown.MenuItems.Add(this.ribbonOrbMenuItemSave);
+            this.ribbon.OrbDropDown.MenuItems.Add(this.ribbonOrbMenuItemExit);
             this.ribbon.OrbDropDown.Name = "";
-            this.ribbon.OrbDropDown.Size = new System.Drawing.Size(527, 447);
+            this.ribbon.OrbDropDown.Size = new System.Drawing.Size(527, 204);
             this.ribbon.OrbDropDown.TabIndex = 0;
             this.ribbon.OrbImage = null;
             this.ribbon.Size = new System.Drawing.Size(810, 155);
@@ -70,6 +74,28 @@ namespace MdsPaint
             this.ribbon.Tabs.Add(this.ribbonTabActions);
             this.ribbon.TabsMargin = new System.Windows.Forms.Padding(12, 26, 20, 0);
             this.ribbon.Text = "ribbon1";
+            // 
+            // ribbonOrbMenuItemNew
+            // 
+            this.ribbonOrbMenuItemNew.DropDownArrowDirection = System.Windows.Forms.RibbonArrowDirection.Left;
+            this.ribbonOrbMenuItemNew.Image = ((System.Drawing.Image)(resources.GetObject("ribbonOrbMenuItemNew.Image")));
+            this.ribbonOrbMenuItemNew.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonOrbMenuItemNew.SmallImage")));
+            this.ribbonOrbMenuItemNew.Text = "New";
+            // 
+            // ribbonOrbMenuItemSave
+            // 
+            this.ribbonOrbMenuItemSave.DropDownArrowDirection = System.Windows.Forms.RibbonArrowDirection.Left;
+            this.ribbonOrbMenuItemSave.Image = ((System.Drawing.Image)(resources.GetObject("ribbonOrbMenuItemSave.Image")));
+            this.ribbonOrbMenuItemSave.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonOrbMenuItemSave.SmallImage")));
+            this.ribbonOrbMenuItemSave.Text = "Save";
+            // 
+            // ribbonOrbMenuItemExit
+            // 
+            this.ribbonOrbMenuItemExit.DropDownArrowDirection = System.Windows.Forms.RibbonArrowDirection.Left;
+            this.ribbonOrbMenuItemExit.Image = ((System.Drawing.Image)(resources.GetObject("ribbonOrbMenuItemExit.Image")));
+            this.ribbonOrbMenuItemExit.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonOrbMenuItemExit.SmallImage")));
+            this.ribbonOrbMenuItemExit.Text = "Exit";
+            this.ribbonOrbMenuItemExit.Click += new System.EventHandler(this.ribbonOrbMenuItemExit_Click);
             // 
             // ribbonTabPlugins
             // 
@@ -95,9 +121,16 @@ namespace MdsPaint
             // 
             // ribbonPanelFileActions
             // 
-            this.ribbonPanelFileActions.Items.Add(this.rbtLoadFile);
             this.ribbonPanelFileActions.Items.Add(this.rbtSaveFile);
+            this.ribbonPanelFileActions.Items.Add(this.rbtLoadFile);
             this.ribbonPanelFileActions.Text = "File";
+            // 
+            // rbtSaveFile
+            // 
+            this.rbtSaveFile.Image = ((System.Drawing.Image)(resources.GetObject("rbtSaveFile.Image")));
+            this.rbtSaveFile.SmallImage = ((System.Drawing.Image)(resources.GetObject("rbtSaveFile.SmallImage")));
+            this.rbtSaveFile.Text = "Save file";
+            this.rbtSaveFile.Click += new System.EventHandler(this.rbtSaveFile_Click);
             // 
             // rbtLoadFile
             // 
@@ -113,13 +146,6 @@ namespace MdsPaint
             this.ribbonButton2.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton2.SmallImage")));
             this.ribbonButton2.Text = "ribbonButton2";
             // 
-            // rbtSaveFile
-            // 
-            this.rbtSaveFile.Image = ((System.Drawing.Image)(resources.GetObject("rbtSaveFile.Image")));
-            this.rbtSaveFile.SmallImage = ((System.Drawing.Image)(resources.GetObject("rbtSaveFile.SmallImage")));
-            this.rbtSaveFile.Text = "Save to a file";
-            this.rbtSaveFile.Click += new System.EventHandler(this.rbtSaveFile_Click);
-            // 
             // statusStrip
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -134,6 +160,7 @@ namespace MdsPaint
             // toolStripStatusLocationLabel
             // 
             this.toolStripStatusLocationLabel.AutoSize = false;
+            this.toolStripStatusLocationLabel.BackColor = System.Drawing.SystemColors.Control;
             this.toolStripStatusLocationLabel.Name = "toolStripStatusLocationLabel";
             this.toolStripStatusLocationLabel.Size = new System.Drawing.Size(112, 17);
             this.toolStripStatusLocationLabel.Text = "toolStripStatusLabel";
@@ -141,41 +168,34 @@ namespace MdsPaint
             // 
             // toolStripStatusLabel
             // 
+            this.toolStripStatusLabel.BackColor = System.Drawing.SystemColors.Control;
             this.toolStripStatusLabel.Name = "toolStripStatusLabel";
             this.toolStripStatusLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.toolStripStatusLabel.Size = new System.Drawing.Size(118, 17);
             this.toolStripStatusLabel.Text = "toolStripStatusLabel2";
             // 
-            // pbPaintingArea
+            // paintingArea
             // 
-            this.pbPaintingArea.BackColor = System.Drawing.Color.White;
-            this.pbPaintingArea.Location = new System.Drawing.Point(12, 161);
-            this.pbPaintingArea.Name = "pbPaintingArea";
-            this.pbPaintingArea.Size = new System.Drawing.Size(309, 234);
-            this.pbPaintingArea.TabIndex = 3;
-            this.pbPaintingArea.SizeChanged += new System.EventHandler(this.pbPaintingArea_SizeChanged);
-            this.pbPaintingArea.Paint += new System.Windows.Forms.PaintEventHandler(this.pbPaintingArea_Paint);
-            this.pbPaintingArea.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbPaintingArea_MouseDown);
-            this.pbPaintingArea.MouseLeave += new System.EventHandler(this.pbPaintingArea_MouseLeave);
-            this.pbPaintingArea.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbPaintingArea_MouseMove);
-            this.pbPaintingArea.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pbPaintingArea_MouseUp);
-            this.pbPaintingArea.Resize += new System.EventHandler(this.pbPaintingArea_Resize);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(418, 161);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(265, 201);
-            this.pictureBox1.TabIndex = 4;
-            this.pictureBox1.TabStop = false;
+            this.paintingArea.BackColor = System.Drawing.Color.White;
+            this.paintingArea.Location = new System.Drawing.Point(12, 161);
+            this.paintingArea.Name = "paintingArea";
+            this.paintingArea.Size = new System.Drawing.Size(309, 234);
+            this.paintingArea.TabIndex = 3;
+            this.paintingArea.SizeChanged += new System.EventHandler(this.pbPaintingArea_SizeChanged);
+            this.paintingArea.Paint += new System.Windows.Forms.PaintEventHandler(this.paintingArea_Paint);
+            this.paintingArea.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbPaintingArea_MouseDown);
+            this.paintingArea.MouseLeave += new System.EventHandler(this.pbPaintingArea_MouseLeave);
+            this.paintingArea.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbPaintingArea_MouseMove);
+            this.paintingArea.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pbPaintingArea_MouseUp);
+            this.paintingArea.Resize += new System.EventHandler(this.pbPaintingArea_Resize);
             // 
             // PaintForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(810, 519);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.pbPaintingArea);
+            this.Controls.Add(this.paintingArea);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.ribbon);
             this.Name = "PaintForm";
@@ -183,7 +203,6 @@ namespace MdsPaint
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PaintForm_MouseDown);
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -203,8 +222,10 @@ namespace MdsPaint
         public System.Windows.Forms.ToolStripStatusLabel toolStripStatusLocationLabel;
         private System.Windows.Forms.RibbonButton ribbonButton2;
         private System.Windows.Forms.RibbonButton rbtSaveFile;
-        public System.Windows.Forms.Panel pbPaintingArea;
-        private PictureBox pictureBox1;
+        public System.Windows.Forms.Panel paintingArea;
+        private RibbonOrbMenuItem ribbonOrbMenuItemNew;
+        private RibbonOrbMenuItem ribbonOrbMenuItemSave;
+        private RibbonOrbMenuItem ribbonOrbMenuItemExit;
     }
 }
 

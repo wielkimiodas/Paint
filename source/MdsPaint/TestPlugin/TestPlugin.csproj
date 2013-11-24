@@ -55,6 +55,9 @@
       <Name>MdsPaint</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="grayscale.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy "$(TargetDir)TestPlugin.dll" "C:\Users\Wojciech\Documents\studia\mgr\1 semestr\tpal\Paint\plugins\TestPlugin.dll"</PostBuildEvent>

@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.Linq;
-using System.Text;
 
-namespace MdsPaint
+namespace MdsPaint.PluginManagment
 {
     public class PluginImporter
     {
@@ -13,6 +12,7 @@ namespace MdsPaint
 
         [ImportMany(typeof(IMdsPaintPlugin))]
         private IEnumerable<Lazy<IMdsPaintPlugin>> _plugins;
+        private const string LibsPath = @"C:\Users\Wojciech\Documents\studia\mgr\1 semestr\tpal\Paint\plugins";
 
         public PluginImporter()
         {
@@ -23,10 +23,9 @@ namespace MdsPaint
         {
             //An aggregate catalog that combines multiple catalogs
             var catalog = new AggregateCatalog();
+            
             //Adds all the parts found in the same assembly as the Program class
-
-            const string libsPath = @"C:\Users\Wojciech\Documents\studia\mgr\1 semestr\tpal\Paint\plugins";
-            catalog.Catalogs.Add(new DirectoryCatalog(libsPath));
+            catalog.Catalogs.Add(new DirectoryCatalog(LibsPath));
 
             //Create the CompositionContainer with the parts in the catalog
             _container = new CompositionContainer(catalog);
