@@ -176,6 +176,7 @@ namespace MdsPaint.View
             // 
             // paintingArea
             // 
+            this.paintingArea.AutoScroll = true;
             this.paintingArea.BackColor = System.Drawing.Color.White;
             this.paintingArea.Location = new System.Drawing.Point(12, 161);
             this.paintingArea.Name = "paintingArea";

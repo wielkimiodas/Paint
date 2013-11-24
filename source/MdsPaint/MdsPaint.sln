@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{D4CC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestPlugin", "TestPlugin\TestPlugin.csproj", "{AD1DE667-97CB-40E7-B0FA-64609B175FA2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NegativePlugin", "NegativePlugin\NegativePlugin.csproj", "{BB716219-25C8-4474-ADE8-B93E318141AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,16 @@ Global
 		{AD1DE667-97CB-40E7-B0FA-64609B175FA2}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{AD1DE667-97CB-40E7-B0FA-64609B175FA2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{AD1DE667-97CB-40E7-B0FA-64609B175FA2}.Release|x86.ActiveCfg = Release|Any CPU
+		{BB716219-25C8-4474-ADE8-B93E318141AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB716219-25C8-4474-ADE8-B93E318141AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB716219-25C8-4474-ADE8-B93E318141AE}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{BB716219-25C8-4474-ADE8-B93E318141AE}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{BB716219-25C8-4474-ADE8-B93E318141AE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BB716219-25C8-4474-ADE8-B93E318141AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB716219-25C8-4474-ADE8-B93E318141AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB716219-25C8-4474-ADE8-B93E318141AE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{BB716219-25C8-4474-ADE8-B93E318141AE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{BB716219-25C8-4474-ADE8-B93E318141AE}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -61,5 +73,6 @@ Global
 		{778EC467-5850-4330-8285-8CBF5946A0FF} = {0C30EEF5-52D5-4FE0-87D0-4F81B6FCCAE3}
 		{BED3144A-DF23-403F-935A-4C5A00F224B6} = {28A612A8-7734-47D4-B3A4-76443D01E808}
 		{AD1DE667-97CB-40E7-B0FA-64609B175FA2} = {D4CC8D99-D844-45E6-87E6-B54BA7E5CFB5}
+		{BB716219-25C8-4474-ADE8-B93E318141AE} = {D4CC8D99-D844-45E6-87E6-B54BA7E5CFB5}
 	EndGlobalSection
 EndGlobal

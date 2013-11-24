@@ -10,8 +10,8 @@ namespace MdsPaint.PluginManagment
     {
         private CompositionContainer _container;
 
-        [ImportMany(typeof(IMdsPaintPlugin))]
-        private IEnumerable<Lazy<IMdsPaintPlugin>> _plugins;
+        [ImportMany(typeof(MdsPaintPluginBase))]
+        private IEnumerable<Lazy<MdsPaintPluginBase>> _plugins;
         private const string LibsPath = @"C:\Users\Wojciech\Documents\studia\mgr\1 semestr\tpal\Paint\plugins";
 
         public PluginImporter()
@@ -44,7 +44,7 @@ namespace MdsPaint.PluginManagment
             return list;
         }
 
-        public IEnumerable<IMdsPaintPlugin> GetPluginsList()
+        public IEnumerable<MdsPaintPluginBase> GetPluginsList()
         {
             return _plugins.Select(plugin => plugin.Value).ToList();
         }

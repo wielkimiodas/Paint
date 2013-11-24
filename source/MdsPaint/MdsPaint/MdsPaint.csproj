@@ -64,7 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PluginManagment\IMdsPaintPlugin.cs" />
+    <Compile Include="PluginManagment\MdsPaintPluginBase.cs" />
     <Compile Include="PluginManagment\PluginImporter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

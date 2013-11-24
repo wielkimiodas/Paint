@@ -9,7 +9,7 @@ namespace MdsPaint.View
 {
     public partial class PaintForm : Form
     {
-        private IEnumerable<IMdsPaintPlugin> plugins;
+        private IEnumerable<MdsPaintPluginBase> plugins;
         public Bitmap MainBitmap;
 
         private readonly Size _initialMainBitmapSize = new Size(100,100);
