@@ -1,4 +1,6 @@
-﻿namespace MdsPaint
+﻿using System.Windows.Forms;
+
+namespace MdsPaint
 {
     partial class PaintForm
     {
@@ -30,9 +32,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PaintForm));
             this.ribbon = new System.Windows.Forms.Ribbon();
-            this.ribbonTab1 = new System.Windows.Forms.RibbonTab();
-            this.ribbonPanel1 = new System.Windows.Forms.RibbonPanel();
-            this.ribbonButton1 = new System.Windows.Forms.RibbonButton();
+            this.ribbonTabPlugins = new System.Windows.Forms.RibbonTab();
+            this.ribbonPanelPlugins = new System.Windows.Forms.RibbonPanel();
+            this.ribbonButtonPlugins = new System.Windows.Forms.RibbonButton();
             this.ribbonTabActions = new System.Windows.Forms.RibbonTab();
             this.ribbonPanelFileActions = new System.Windows.Forms.RibbonPanel();
             this.rbtLoadFile = new System.Windows.Forms.RibbonButton();
@@ -41,9 +43,10 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLocationLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.pbPaintingArea = new MdsPaint.MdsPictureBox();
+            this.pbPaintingArea = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.statusStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbPaintingArea)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // ribbon
@@ -63,27 +66,27 @@
             this.ribbon.OrbImage = null;
             this.ribbon.Size = new System.Drawing.Size(810, 155);
             this.ribbon.TabIndex = 1;
-            this.ribbon.Tabs.Add(this.ribbonTab1);
+            this.ribbon.Tabs.Add(this.ribbonTabPlugins);
             this.ribbon.Tabs.Add(this.ribbonTabActions);
             this.ribbon.TabsMargin = new System.Windows.Forms.Padding(12, 26, 20, 0);
             this.ribbon.Text = "ribbon1";
             // 
-            // ribbonTab1
+            // ribbonTabPlugins
             // 
-            this.ribbonTab1.Panels.Add(this.ribbonPanel1);
-            this.ribbonTab1.Text = "ribbonTab1";
+            this.ribbonTabPlugins.Panels.Add(this.ribbonPanelPlugins);
+            this.ribbonTabPlugins.Text = "Plugins";
             // 
-            // ribbonPanel1
+            // ribbonPanelPlugins
             // 
-            this.ribbonPanel1.Items.Add(this.ribbonButton1);
-            this.ribbonPanel1.Text = "ribbonPanel1";
+            this.ribbonPanelPlugins.Items.Add(this.ribbonButtonPlugins);
+            this.ribbonPanelPlugins.Text = "Plugins";
             // 
-            // ribbonButton1
+            // ribbonButtonPlugins
             // 
-            this.ribbonButton1.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButton1.Image")));
-            this.ribbonButton1.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton1.SmallImage")));
-            this.ribbonButton1.Text = "ribbonButton1";
-            this.ribbonButton1.Click += new System.EventHandler(this.ribbonButton1_Click);
+            this.ribbonButtonPlugins.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButtonPlugins.Image")));
+            this.ribbonButtonPlugins.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButtonPlugins.SmallImage")));
+            this.ribbonButtonPlugins.Text = "Import plugins";
+            this.ribbonButtonPlugins.Click += new System.EventHandler(this.ribbonButtonPlugins_Click);
             // 
             // ribbonTabActions
             // 
@@ -148,26 +151,39 @@
             this.pbPaintingArea.BackColor = System.Drawing.Color.White;
             this.pbPaintingArea.Location = new System.Drawing.Point(12, 161);
             this.pbPaintingArea.Name = "pbPaintingArea";
-            this.pbPaintingArea.Size = new System.Drawing.Size(433, 256);
+            this.pbPaintingArea.Size = new System.Drawing.Size(309, 234);
             this.pbPaintingArea.TabIndex = 3;
-            this.pbPaintingArea.TabStop = false;
+            this.pbPaintingArea.SizeChanged += new System.EventHandler(this.pbPaintingArea_SizeChanged);
+            this.pbPaintingArea.Paint += new System.Windows.Forms.PaintEventHandler(this.pbPaintingArea_Paint);
+            this.pbPaintingArea.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbPaintingArea_MouseDown);
             this.pbPaintingArea.MouseLeave += new System.EventHandler(this.pbPaintingArea_MouseLeave);
             this.pbPaintingArea.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbPaintingArea_MouseMove);
+            this.pbPaintingArea.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pbPaintingArea_MouseUp);
             this.pbPaintingArea.Resize += new System.EventHandler(this.pbPaintingArea_Resize);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(418, 161);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(265, 201);
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
             // 
             // PaintForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(810, 519);
-            this.Controls.Add(this.statusStrip);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pbPaintingArea);
+            this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.ribbon);
             this.Name = "PaintForm";
             this.Text = "Mds paint";
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PaintForm_MouseDown);
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbPaintingArea)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -176,9 +192,9 @@
         #endregion
 
         private System.Windows.Forms.Ribbon ribbon;
-        private System.Windows.Forms.RibbonTab ribbonTab1;
-        private System.Windows.Forms.RibbonPanel ribbonPanel1;
-        private System.Windows.Forms.RibbonButton ribbonButton1;
+        private System.Windows.Forms.RibbonTab ribbonTabPlugins;
+        private System.Windows.Forms.RibbonPanel ribbonPanelPlugins;
+        private System.Windows.Forms.RibbonButton ribbonButtonPlugins;
         private System.Windows.Forms.RibbonTab ribbonTabActions;
         private System.Windows.Forms.RibbonPanel ribbonPanelFileActions;
         private System.Windows.Forms.RibbonButton rbtLoadFile;
@@ -187,7 +203,8 @@
         public System.Windows.Forms.ToolStripStatusLabel toolStripStatusLocationLabel;
         private System.Windows.Forms.RibbonButton ribbonButton2;
         private System.Windows.Forms.RibbonButton rbtSaveFile;
-        public MdsPictureBox pbPaintingArea;
+        public System.Windows.Forms.Panel pbPaintingArea;
+        private PictureBox pictureBox1;
     }
 }
 

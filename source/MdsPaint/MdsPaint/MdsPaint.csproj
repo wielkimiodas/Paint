@@ -48,6 +48,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
     <Reference Include="System.Windows.Forms.Ribbon35">
@@ -64,15 +65,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileUtils.cs" />
-    <Compile Include="MdsPictureBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="IMdsPaintPlugin.cs" />
     <Compile Include="PaintForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PaintForm.Designer.cs">
       <DependentUpon>PaintForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PluginImporter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StatusLogger.cs" />

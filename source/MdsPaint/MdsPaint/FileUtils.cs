@@ -45,7 +45,7 @@ namespace MdsPaint
                 //p.Width = 5.0f;
                 //gr.DrawRectangle(p, 1, 2, 30, 40);
                 var img = Image.FromFile(path);
-                form.pbPaintingArea.Image = img;
+                //form.pbPaintingArea.Image = img;
                 form.pbPaintingArea.Size = img.Size;
             }
         }
