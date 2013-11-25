@@ -8,8 +8,8 @@
     <ProjectGuid>{AD1DE667-97CB-40E7-B0FA-64609B175FA2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TestPlugin</RootNamespace>
-    <AssemblyName>TestPlugin</AssemblyName>
+    <RootNamespace>GrayScalePlugin</RootNamespace>
+    <AssemblyName>GrayScalePlugin</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -46,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MboxExecuter.cs" />
+    <Compile Include="GrayScaleMaker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -60,7 +60,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetDir)TestPlugin.dll" "C:\Users\Wojciech\Documents\studia\mgr\1 semestr\tpal\Paint\plugins\TestPlugin.dll"</PostBuildEvent>
+    <PostBuildEvent>copy "$(TargetDir)GrayScalePlugin.dll" "C:\Users\Wojciech\Documents\studia\mgr\1 semestr\tpal\Paint\plugins\GrayScalePlugin.dll"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

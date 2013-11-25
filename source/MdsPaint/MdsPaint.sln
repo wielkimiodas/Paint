@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{28A612A8-7
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{D4CC8D99-D844-45E6-87E6-B54BA7E5CFB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestPlugin", "TestPlugin\TestPlugin.csproj", "{AD1DE667-97CB-40E7-B0FA-64609B175FA2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrayScalePlugin", "GrayScalePlugin\GrayScalePlugin.csproj", "{AD1DE667-97CB-40E7-B0FA-64609B175FA2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NegativePlugin", "NegativePlugin\NegativePlugin.csproj", "{BB716219-25C8-4474-ADE8-B93E318141AE}"
 EndProject

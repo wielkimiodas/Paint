@@ -15,7 +15,7 @@ using MdsPaint.Utils;
 namespace TestPlugin
 {
     [Export(typeof(MdsPaintPluginBase))]
-    public class MboxExecuter : MdsPaintPluginBase
+    public class GrayScaleMaker : MdsPaintPluginBase
     {
         public override Image ButtonImage
         {

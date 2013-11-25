@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Reflection;
+using System.Threading;
 using System.Windows.Forms;
 using MdsPaint.Utils;
 
@@ -43,9 +44,10 @@ namespace MdsPaint.PluginManagment
             var panelDim = panel.Size;
             var source = new Bitmap(panelDim.Width, panelDim.Height);
             panel.DrawToBitmap(source, new Rectangle(0, 0, panelDim.Width, panelDim.Height));
-            
-            plugin.ProcessBitmap(source,plugin.Picture);
-            
+
+            var t = new Thread(() => plugin.ProcessBitmap(source, plugin.Picture));
+            t.Start();
+
             plugin.PanelPointer.Invalidate();
         }
 
