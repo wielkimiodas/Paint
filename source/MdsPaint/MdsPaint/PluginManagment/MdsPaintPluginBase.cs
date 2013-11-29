@@ -16,7 +16,9 @@ namespace MdsPaint.PluginManagment
         public abstract Image ButtonImage { get; }
         public abstract string PanelLabel { get; }
 
-        public abstract void ProcessBitmap(Bitmap source, Bitmap dest);
+        public abstract void ProcessBitmap(Bitmap source, Bitmap dest, Semaphore s);
+
+        public static object Locker = new object();
 
         public RibbonPanel RibbonPanel
         {
@@ -30,7 +32,7 @@ namespace MdsPaint.PluginManagment
         {
             var button = new RibbonButton(Name) { Tag = this };
             button.Click += button_Click;
-            button.SmallImage = ButtonImage;
+            button.Image = ButtonImage;
             var panel = new RibbonPanel(PanelLabel);
             panel.Items.Add(button);
             return panel;
@@ -45,10 +47,13 @@ namespace MdsPaint.PluginManagment
             var source = new Bitmap(panelDim.Width, panelDim.Height);
             panel.DrawToBitmap(source, new Rectangle(0, 0, panelDim.Width, panelDim.Height));
 
-            var t = new Thread(() => plugin.ProcessBitmap(source, plugin.Picture));
-            t.Start();
+            Semaphore s = new Semaphore(1,1);
+            s.WaitOne();
+                var t = new Thread(() => plugin.ProcessBitmap(source, plugin.Picture,s));
+                t.Start();
 
-            plugin.PanelPointer.Invalidate();
+            s.WaitOne();
+                plugin.PanelPointer.Refresh();
         }
 
         public abstract string Name { get; }

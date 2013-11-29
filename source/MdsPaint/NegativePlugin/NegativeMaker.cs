@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using MdsPaint.PluginManagment;
 using MdsPaint.Utils;
 
@@ -23,12 +24,17 @@ namespace NegativePlugin
             get { return "Negative plugin"; }
         }
 
+        //public override Bitmap ProcessBitmap(Bitmap source)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
         public override string Name
         {
             get { return "Negative maker"; }
         }
 
-        public override void ProcessBitmap(Bitmap source, Bitmap dest)
+        public override void ProcessBitmap(Bitmap source, Bitmap dest,Semaphore s)
         {
             for (int i = 0; i < source.Width; i++)
             {
@@ -39,6 +45,7 @@ namespace NegativePlugin
                     dest.SetPixel(i, j, c);
                 }
             }
+            s.Release();
         }
     }
 }

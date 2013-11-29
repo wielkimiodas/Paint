@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using MdsPaint;
 using MdsPaint.PluginManagment;
@@ -19,7 +20,7 @@ namespace TestPlugin
     {
         public override Image ButtonImage
         {
-            get { return Assembly.GetExecutingAssembly().RetrieveImageFromEmbeddedResource("TestPlugin.grayscale.png"); }
+            get { return Assembly.GetExecutingAssembly().RetrieveImageFromEmbeddedResource("GrayScalePlugin.grayscale.png"); }
         }
 
         public override string PanelLabel
@@ -27,7 +28,7 @@ namespace TestPlugin
             get { return "Gray plugin"; }
         }
 
-        public override void ProcessBitmap(Bitmap source, Bitmap dest)
+        public override void ProcessBitmap(Bitmap source, Bitmap dest, Semaphore s)
         {
             for (int y = 0; y < source.Height; y++)
             {
@@ -38,6 +39,8 @@ namespace TestPlugin
                     dest.SetPixel(x, y, Color.FromArgb(luma, luma, luma));
                 }
             }
+            System.Threading.Thread.Sleep(5000);
+            s.Release();
         }
 
         public override string Name
