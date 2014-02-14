@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.Composition;
 using System.Drawing;
 using System.Reflection;
-using System.Threading;
 using MdsPaint.PluginManagment;
 using MdsPaint.Utils;
 
@@ -43,7 +42,5 @@ namespace TestPlugin
             //Thread.Sleep(5000);
             return tempBitmap;
         }
-
-        
     }
 }

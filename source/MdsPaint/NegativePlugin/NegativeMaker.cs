@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.Composition;
 using System.Drawing;
 using System.Reflection;
-using System.Threading;
 using MdsPaint.PluginManagment;
 using MdsPaint.Utils;
 
@@ -22,7 +21,7 @@ namespace NegativePlugin
         {
             get { return "Negative plugin"; }
         }
-        
+
         public override string Name
         {
             get { return "Negative maker"; }
@@ -37,6 +36,7 @@ namespace NegativePlugin
                 {
                     var c = tempBmp.GetPixel(i, j);
                     c = Color.FromArgb(255 - c.R, 255 - c.G, 255 - c.B);
+                    tempBmp.SetPixel(i,j,c);
                 }
             }
             return tempBmp;

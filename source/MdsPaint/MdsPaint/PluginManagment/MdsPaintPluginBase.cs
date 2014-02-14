@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using MdsPaint.View;
@@ -34,8 +32,8 @@ namespace MdsPaint.PluginManagment
 
         private static void button_Click(object sender, EventArgs e)
         {
-            var btn = (RibbonButton)sender;
-            var plugin = (MdsPaintPluginBase)(btn.Tag);
+            var btn = (RibbonButton) sender;
+            var plugin = (MdsPaintPluginBase) (btn.Tag);
 
             var t = new Thread(() => BtnAction(plugin));
             t.Start();
@@ -45,15 +43,11 @@ namespace MdsPaint.PluginManagment
         {
             var res = plugin.ProcessBitmap(plugin.PaintFormPointer.MainBitmap);
             var changeImgAction = new Action(() => plugin.PaintFormPointer.OverwritePanel(res));
-            
+
             var asyncImgChange = plugin.PaintFormPointer.paintingArea.BeginInvoke(changeImgAction);
             plugin.PaintFormPointer.paintingArea.EndInvoke(asyncImgChange);
-            
+
             Thread.CurrentThread.Abort();
         }
-
-
-
-        
     }
 }
