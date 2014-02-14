@@ -40,6 +40,12 @@ namespace MdsPaint.PluginManagment
 
         static void button_Click(object sender, EventArgs e)
         {
+            var t = new Thread(() => btnAction(sender,e));
+            t.Start();
+        }
+
+        public static void btnAction(object sender, EventArgs e)
+        {
             var btn = (RibbonButton)sender;
             var plugin = (MdsPaintPluginBase)(btn.Tag);
             var panel = plugin.PanelPointer;
@@ -47,14 +53,18 @@ namespace MdsPaint.PluginManagment
             var source = new Bitmap(panelDim.Width, panelDim.Height);
             panel.DrawToBitmap(source, new Rectangle(0, 0, panelDim.Width, panelDim.Height));
 
-            Semaphore s = new Semaphore(1,1);
-            s.WaitOne();
-                var t = new Thread(() => plugin.ProcessBitmap(source, plugin.Picture,s));
-                t.Start();
+            Semaphore s = new Semaphore(1, 1);
+            //  s.WaitOne();
+            //var t = new Thread(() => plugin.ProcessBitmap(source, plugin.Picture, s));
+            //t.Start();
 
-            s.WaitOne();
-                plugin.PanelPointer.Refresh();
+            plugin.ProcessBitmap(source, plugin.Picture, s);
+
+            //s.WaitOne();
+            plugin.PanelPointer.Refresh();
         }
+
+
 
         public abstract string Name { get; }
     }
