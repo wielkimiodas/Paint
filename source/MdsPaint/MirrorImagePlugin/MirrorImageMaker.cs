@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Threading;
 using MdsPaint.PluginManagment;
 using System.ComponentModel.Composition;
 using System.Drawing;
@@ -41,8 +42,7 @@ namespace MirrorImagePlugin
 
                 }
             }
-
-
+            Thread.Sleep(5000);
             return tempBitmap;
         }
     }

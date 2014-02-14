@@ -20,13 +20,15 @@ namespace MdsPaint.PluginManagment
             get { return InitRibbonPanel(); }
         }
 
+
+
         private RibbonPanel InitRibbonPanel()
         {
-            var button = new RibbonButton(Name) {Tag = this};
-            button.Click += button_Click;
-            button.Image = ButtonImage;
+            var btn = new RibbonButton(Name) {Tag = this};
+            btn.Click += button_Click;
+            btn.Image = ButtonImage;
             var panel = new RibbonPanel(PanelLabel);
-            panel.Items.Add(button);
+            panel.Items.Add(btn);
             return panel;
         }
 
@@ -34,7 +36,7 @@ namespace MdsPaint.PluginManagment
         {
             var btn = (RibbonButton) sender;
             var plugin = (MdsPaintPluginBase) (btn.Tag);
-
+            plugin.PaintFormPointer.EnableRibbon(false);
             var t = new Thread(() => BtnAction(plugin));
             t.Start();
         }
@@ -46,7 +48,7 @@ namespace MdsPaint.PluginManagment
 
             var asyncImgChange = plugin.PaintFormPointer.paintingArea.BeginInvoke(changeImgAction);
             plugin.PaintFormPointer.paintingArea.EndInvoke(asyncImgChange);
-
+            plugin.PaintFormPointer.EnableRibbon(true);
             Thread.CurrentThread.Abort();
         }
     }

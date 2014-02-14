@@ -68,5 +68,16 @@ namespace MdsPaint.View
             MainBitmap = bmp;
             paintingArea.Refresh();
         }
+
+        public void EnableRibbon(bool enabled)
+        {
+            foreach (var tab in ribbon.Tabs)
+            {
+                foreach (var panel in tab.Panels)
+                {
+                    panel.Enabled = enabled;
+                }
+            }
+        }
     }
 }
