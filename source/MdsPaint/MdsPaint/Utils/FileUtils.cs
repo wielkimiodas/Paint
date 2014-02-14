@@ -10,14 +10,14 @@ namespace MdsPaint.Utils
     {
         public static string GetBmpFilePath()
         {
-            var openFileDialog = new OpenFileDialog { Filter = Resources.BmpFilter };
+            var openFileDialog = new OpenFileDialog {Filter = Resources.BmpFilter};
             openFileDialog.ShowDialog();
             return openFileDialog.FileName;
         }
 
         public static string GetNewFilePath()
         {
-            var saveFileDialog = new SaveFileDialog { Filter = Resources.BmpFilter };
+            var saveFileDialog = new SaveFileDialog {Filter = Resources.BmpFilter};
             saveFileDialog.ShowDialog();
             return saveFileDialog.FileName;
         }
@@ -35,7 +35,7 @@ namespace MdsPaint.Utils
         {
             var path = GetBmpFilePath();
             if (string.IsNullOrEmpty(path)) return;
-            
+
             var bmp = new Bitmap(path);
             var formatedBmp = new Bitmap(bmp.Width, bmp.Height, PixelFormat.Format32bppArgb);
 
@@ -47,7 +47,5 @@ namespace MdsPaint.Utils
             form.MainBitmap = formatedBmp;
             form.paintingArea.Invalidate();
         }
-
-
     }
 }

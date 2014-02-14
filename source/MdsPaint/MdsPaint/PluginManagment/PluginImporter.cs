@@ -10,8 +10,7 @@ namespace MdsPaint.PluginManagment
     {
         private CompositionContainer _container;
 
-        [ImportMany(typeof(MdsPaintPluginBase))]
-        private IEnumerable<Lazy<MdsPaintPluginBase>> _plugins;
+        [ImportMany(typeof (MdsPaintPluginBase))] private IEnumerable<Lazy<MdsPaintPluginBase>> _plugins;
         private const string LibsPath = @"C:\Users\Wojciech\Documents\studia\mgr\1 semestr\tpal\Paint\plugins";
 
         public PluginImporter()
@@ -23,7 +22,7 @@ namespace MdsPaint.PluginManagment
         {
             //An aggregate catalog that combines multiple catalogs
             var catalog = new AggregateCatalog();
-            
+
             //Adds all the parts found in the same assembly as the Program class
             catalog.Catalogs.Add(new DirectoryCatalog(LibsPath));
 

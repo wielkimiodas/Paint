@@ -12,14 +12,14 @@ namespace MdsPaint.View
         private IEnumerable<MdsPaintPluginBase> plugins;
         public Bitmap MainBitmap;
 
-        private readonly Size _initialMainBitmapSize = new Size(100,100);
+        private readonly Size _initialMainBitmapSize = new Size(100, 100);
 
         public PaintForm()
         {
             InitializeComponent();
             statusStrip.BringToFront();
 
-            MainBitmap = new Bitmap(_initialMainBitmapSize.Width,_initialMainBitmapSize.Height);
+            MainBitmap = new Bitmap(_initialMainBitmapSize.Width, _initialMainBitmapSize.Height);
             using (var graphics = Graphics.FromImage(MainBitmap))
             {
                 graphics.FillEllipse(Brushes.Aqua, 0, 0, 50, 50);
@@ -39,7 +39,7 @@ namespace MdsPaint.View
         private void paintingArea_Paint(object sender, PaintEventArgs e)
         {
             paintingArea.Size = MainBitmap.Size;
-            e.Graphics.DrawImageUnscaled(MainBitmap,Point.Empty);
+            e.Graphics.DrawImageUnscaled(MainBitmap, Point.Empty);
         }
 
         private void ImportPlugins()
@@ -57,11 +57,16 @@ namespace MdsPaint.View
 
             foreach (var plugin in plugins)
             {
-                plugin.PanelPointer = paintingArea;
-                plugin.Picture = MainBitmap;
+                plugin.PaintFormPointer = this;
                 ribbonTabPlugins.Panels.Add(plugin.RibbonPanel);
             }
             ribbon.ResumeUpdating(true);
+        }
+
+        public void OverwritePanel(Bitmap bmp)
+        {
+            MainBitmap = bmp;
+            paintingArea.Refresh();
         }
     }
 }

@@ -1,36 +1,30 @@
 ﻿using System;
 using System.Drawing;
-using System.Reflection;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Threading;
 using System.Windows.Forms;
-using MdsPaint.Utils;
+using MdsPaint.View;
 
 namespace MdsPaint.PluginManagment
 {
     public abstract class MdsPaintPluginBase
     {
-        public Panel PanelPointer { get; set; }
-
-        public Bitmap Picture { get; set; }
-
+        public PaintForm PaintFormPointer { get; set; }
         public abstract Image ButtonImage { get; }
         public abstract string PanelLabel { get; }
+        public abstract string Name { get; }
 
-        public abstract void ProcessBitmap(Bitmap source, Bitmap dest, Semaphore s);
-
-        public static object Locker = new object();
+        public abstract Bitmap ProcessBitmap(Bitmap source);
 
         public RibbonPanel RibbonPanel
         {
-            get
-            {
-                return InitRibbonPanel();
-            }
+            get { return InitRibbonPanel(); }
         }
 
         private RibbonPanel InitRibbonPanel()
         {
-            var button = new RibbonButton(Name) { Tag = this };
+            var button = new RibbonButton(Name) {Tag = this};
             button.Click += button_Click;
             button.Image = ButtonImage;
             var panel = new RibbonPanel(PanelLabel);
@@ -38,34 +32,28 @@ namespace MdsPaint.PluginManagment
             return panel;
         }
 
-        static void button_Click(object sender, EventArgs e)
-        {
-            var t = new Thread(() => btnAction(sender,e));
-            t.Start();
-        }
-
-        public static void btnAction(object sender, EventArgs e)
+        private static void button_Click(object sender, EventArgs e)
         {
             var btn = (RibbonButton)sender;
             var plugin = (MdsPaintPluginBase)(btn.Tag);
-            var panel = plugin.PanelPointer;
-            var panelDim = panel.Size;
-            var source = new Bitmap(panelDim.Width, panelDim.Height);
-            panel.DrawToBitmap(source, new Rectangle(0, 0, panelDim.Width, panelDim.Height));
 
-            Semaphore s = new Semaphore(1, 1);
-            //  s.WaitOne();
-            //var t = new Thread(() => plugin.ProcessBitmap(source, plugin.Picture, s));
-            //t.Start();
+            var t = new Thread(() => BtnAction(plugin));
+            t.Start();
+        }
 
-            plugin.ProcessBitmap(source, plugin.Picture, s);
-
-            //s.WaitOne();
-            plugin.PanelPointer.Refresh();
+        public static void BtnAction(MdsPaintPluginBase plugin)
+        {
+            var res = plugin.ProcessBitmap(plugin.PaintFormPointer.MainBitmap);
+            var changeImgAction = new Action(() => plugin.PaintFormPointer.OverwritePanel(res));
+            
+            var asyncImgChange = plugin.PaintFormPointer.paintingArea.BeginInvoke(changeImgAction);
+            plugin.PaintFormPointer.paintingArea.EndInvoke(asyncImgChange);
+            
+            Thread.CurrentThread.Abort();
         }
 
 
 
-        public abstract string Name { get; }
+        
     }
 }

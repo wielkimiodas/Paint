@@ -12,7 +12,9 @@ namespace MdsPaint.View
         }
 
         #region Resizing
+
         private bool mouseDown = false;
+
         private void pbPaintingArea_MouseDown(object sender, MouseEventArgs e)
         {
             mouseDown = true;
@@ -37,7 +39,6 @@ namespace MdsPaint.View
 
         private void pbPaintingArea_Resize(object sender, EventArgs e)
         {
-
         }
 
         #endregion

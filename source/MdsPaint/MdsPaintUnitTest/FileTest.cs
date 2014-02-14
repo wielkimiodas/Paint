@@ -1,6 +1,4 @@
-﻿using System;
-using MdsPaint;
-using MdsPaint.Utils;
+﻿using MdsPaint.Utils;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace MdsPaintUnitTest
