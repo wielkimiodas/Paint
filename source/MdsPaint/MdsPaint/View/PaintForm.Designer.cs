@@ -35,6 +35,8 @@ namespace MdsPaint.View
             this.ribbonOrbMenuItemNew = new System.Windows.Forms.RibbonOrbMenuItem();
             this.ribbonOrbMenuItemSave = new System.Windows.Forms.RibbonOrbMenuItem();
             this.ribbonOrbMenuItemExit = new System.Windows.Forms.RibbonOrbMenuItem();
+            this.ribbonButtonUndo = new System.Windows.Forms.RibbonButton();
+            this.ribbonButtonRedo = new System.Windows.Forms.RibbonButton();
             this.ribbonTabPlugins = new System.Windows.Forms.RibbonTab();
             this.ribbonPanelPlugins = new System.Windows.Forms.RibbonPanel();
             this.ribbonButtonPlugins = new System.Windows.Forms.RibbonButton();
@@ -47,7 +49,11 @@ namespace MdsPaint.View
             this.toolStripStatusLocationLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.paintingArea = new System.Windows.Forms.Panel();
+            this.panelPaintContainer = new System.Windows.Forms.Panel();
+            this.ribbonPanel1 = new System.Windows.Forms.RibbonPanel();
+            this.ribbonButton1 = new System.Windows.Forms.RibbonButton();
             this.statusStrip.SuspendLayout();
+            this.panelPaintContainer.SuspendLayout();
             this.SuspendLayout();
             // 
             // ribbon
@@ -67,7 +73,12 @@ namespace MdsPaint.View
             this.ribbon.OrbDropDown.Name = "";
             this.ribbon.OrbDropDown.Size = new System.Drawing.Size(527, 204);
             this.ribbon.OrbDropDown.TabIndex = 0;
-            this.ribbon.OrbImage = null;
+            this.ribbon.OrbImage = global::MdsPaint.Properties.Resources.Paint1;
+            // 
+            // 
+            // 
+            this.ribbon.QuickAcessToolbar.Items.Add(this.ribbonButtonUndo);
+            this.ribbon.QuickAcessToolbar.Items.Add(this.ribbonButtonRedo);
             this.ribbon.Size = new System.Drawing.Size(810, 155);
             this.ribbon.TabIndex = 1;
             this.ribbon.Tabs.Add(this.ribbonTabPlugins);
@@ -97,6 +108,22 @@ namespace MdsPaint.View
             this.ribbonOrbMenuItemExit.Text = "Exit";
             this.ribbonOrbMenuItemExit.Click += new System.EventHandler(this.ribbonOrbMenuItemExit_Click);
             // 
+            // ribbonButtonUndo
+            // 
+            this.ribbonButtonUndo.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButtonUndo.Image")));
+            this.ribbonButtonUndo.MaxSizeMode = System.Windows.Forms.RibbonElementSizeMode.Compact;
+            this.ribbonButtonUndo.SmallImage = global::MdsPaint.Properties.Resources.arrow_undo16;
+            this.ribbonButtonUndo.Text = "ribbonButton1";
+            this.ribbonButtonUndo.Click += new System.EventHandler(this.ribbonButtonUndo_Click);
+            // 
+            // ribbonButtonRedo
+            // 
+            this.ribbonButtonRedo.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButtonRedo.Image")));
+            this.ribbonButtonRedo.MaxSizeMode = System.Windows.Forms.RibbonElementSizeMode.Compact;
+            this.ribbonButtonRedo.SmallImage = global::MdsPaint.Properties.Resources.arrow_redo16;
+            this.ribbonButtonRedo.Text = "ribbonButton1";
+            this.ribbonButtonRedo.Click += new System.EventHandler(this.ribbonButtonRedo_Click);
+            // 
             // ribbonTabPlugins
             // 
             this.ribbonTabPlugins.Panels.Add(this.ribbonPanelPlugins);
@@ -117,6 +144,7 @@ namespace MdsPaint.View
             // ribbonTabActions
             // 
             this.ribbonTabActions.Panels.Add(this.ribbonPanelFileActions);
+            this.ribbonTabActions.Panels.Add(this.ribbonPanel1);
             this.ribbonTabActions.Text = "Actions";
             // 
             // ribbonPanelFileActions
@@ -176,19 +204,39 @@ namespace MdsPaint.View
             // 
             // paintingArea
             // 
-            this.paintingArea.AutoScroll = true;
             this.paintingArea.BackColor = System.Drawing.Color.White;
-            this.paintingArea.Location = new System.Drawing.Point(12, 161);
+            this.paintingArea.Location = new System.Drawing.Point(3, 3);
             this.paintingArea.Name = "paintingArea";
-            this.paintingArea.Size = new System.Drawing.Size(309, 234);
+            this.paintingArea.Size = new System.Drawing.Size(281, 223);
             this.paintingArea.TabIndex = 3;
-            this.paintingArea.SizeChanged += new System.EventHandler(this.pbPaintingArea_SizeChanged);
             this.paintingArea.Paint += new System.Windows.Forms.PaintEventHandler(this.paintingArea_Paint);
-            this.paintingArea.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbPaintingArea_MouseDown);
             this.paintingArea.MouseLeave += new System.EventHandler(this.pbPaintingArea_MouseLeave);
             this.paintingArea.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbPaintingArea_MouseMove);
-            this.paintingArea.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pbPaintingArea_MouseUp);
-            this.paintingArea.Resize += new System.EventHandler(this.pbPaintingArea_Resize);
+            // 
+            // panelPaintContainer
+            // 
+            this.panelPaintContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelPaintContainer.AutoScroll = true;
+            this.panelPaintContainer.Controls.Add(this.paintingArea);
+            this.panelPaintContainer.Location = new System.Drawing.Point(12, 161);
+            this.panelPaintContainer.Name = "panelPaintContainer";
+            this.panelPaintContainer.Size = new System.Drawing.Size(786, 333);
+            this.panelPaintContainer.TabIndex = 4;
+            this.panelPaintContainer.MouseEnter += new System.EventHandler(this.panelPaintContainer_MouseEnter);
+            // 
+            // ribbonPanel1
+            // 
+            this.ribbonPanel1.Items.Add(this.ribbonButton1);
+            this.ribbonPanel1.Text = "ribbonPanel1";
+            // 
+            // ribbonButton1
+            // 
+            this.ribbonButton1.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButton1.Image")));
+            this.ribbonButton1.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton1.SmallImage")));
+            this.ribbonButton1.Text = "ribbonButton1";
+            this.ribbonButton1.Click += new System.EventHandler(this.ribbonButton1_Click);
             // 
             // PaintForm
             // 
@@ -196,14 +244,15 @@ namespace MdsPaint.View
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(810, 519);
-            this.Controls.Add(this.paintingArea);
+            this.Controls.Add(this.panelPaintContainer);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.ribbon);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PaintForm";
             this.Text = "Mds paint";
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PaintForm_MouseDown);
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
+            this.panelPaintContainer.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -227,6 +276,11 @@ namespace MdsPaint.View
         private RibbonOrbMenuItem ribbonOrbMenuItemNew;
         private RibbonOrbMenuItem ribbonOrbMenuItemSave;
         private RibbonOrbMenuItem ribbonOrbMenuItemExit;
+        private RibbonButton ribbonButtonUndo;
+        private RibbonButton ribbonButtonRedo;
+        private Panel panelPaintContainer;
+        private RibbonPanel ribbonPanel1;
+        private RibbonButton ribbonButton1;
     }
 }
 

@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using MdsPaint.PluginManagment;
+using MdsPaint.Utils;
 
 namespace MdsPaint.View
 {
@@ -11,6 +12,7 @@ namespace MdsPaint.View
     {
         private IEnumerable<MdsPaintPluginBase> plugins;
         public Bitmap MainBitmap;
+        private Stack<Bitmap> _history = new Stack<Bitmap>();
 
         private readonly Size _initialMainBitmapSize = new Size(100, 100);
 
@@ -26,6 +28,9 @@ namespace MdsPaint.View
                 graphics.FillRectangle(Brushes.Crimson, 60, 60, 70, 90);
                 graphics.FillRectangle(Brushes.Yellow, 0, 60, 10, 70);
             }
+
+            var pb = new PickBox();
+            pb.WireControl(paintingArea);
         }
 
         protected override void OnClosed(EventArgs e)
@@ -38,7 +43,8 @@ namespace MdsPaint.View
 
         private void paintingArea_Paint(object sender, PaintEventArgs e)
         {
-            paintingArea.Size = MainBitmap.Size;
+            _history.Push(MainBitmap);
+        //    paintingArea.Size = MainBitmap.Size;
             e.Graphics.DrawImageUnscaled(MainBitmap, Point.Empty);
         }
 
@@ -79,5 +85,7 @@ namespace MdsPaint.View
                 }
             }
         }
+
+        
     }
 }

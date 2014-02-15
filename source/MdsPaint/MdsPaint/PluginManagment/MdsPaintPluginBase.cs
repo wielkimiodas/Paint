@@ -20,8 +20,6 @@ namespace MdsPaint.PluginManagment
             get { return InitRibbonPanel(); }
         }
 
-
-
         private RibbonPanel InitRibbonPanel()
         {
             var btn = new RibbonButton(Name) {Tag = this};

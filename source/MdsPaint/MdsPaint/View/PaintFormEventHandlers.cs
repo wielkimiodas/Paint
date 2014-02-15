@@ -11,38 +11,6 @@ namespace MdsPaint.View
             Close();
         }
 
-        #region Resizing
-
-        private bool mouseDown = false;
-
-        private void pbPaintingArea_MouseDown(object sender, MouseEventArgs e)
-        {
-            mouseDown = true;
-        }
-
-        private void pbPaintingArea_MouseUp(object sender, MouseEventArgs e)
-        {
-            mouseDown = false;
-        }
-
-        private void PaintForm_MouseDown(object sender, MouseEventArgs e)
-        {
-            mouseDown = true;
-        }
-
-        private void pbPaintingArea_SizeChanged(object sender, EventArgs e)
-        {
-            //            if(!mouseDown)
-            //MessageBox.Show(" resized");
-            //pbPaintingArea.FixPictureBoxSize();
-        }
-
-        private void pbPaintingArea_Resize(object sender, EventArgs e)
-        {
-        }
-
-        #endregion
-
         private void rbtLoadFile_Click(object sender, EventArgs e)
         {
             FileUtils.LoadImageFileToMainPanel(this);
@@ -66,6 +34,28 @@ namespace MdsPaint.View
         private void ribbonButtonPlugins_Click(object sender, EventArgs e)
         {
             ImportPlugins();
+        }
+
+        private void ribbonButtonUndo_Click(object sender, EventArgs e)
+        {
+            //MainBitmap = _history.Pop();
+            //MainBitmap = _history.Pop();
+            //paintingArea.Refresh();
+        }
+
+        private void ribbonButtonRedo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ribbonButton1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panelPaintContainer_MouseEnter(object sender, EventArgs e)
+        {
+            panelPaintContainer.Focus();
         }
     }
 }
