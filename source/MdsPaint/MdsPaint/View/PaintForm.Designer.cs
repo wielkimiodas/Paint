@@ -2,7 +2,7 @@
 
 namespace MdsPaint.View
 {
-    partial class PaintForm
+    sealed partial class PaintForm
     {
         /// <summary>
         /// Required designer variable.
@@ -37,6 +37,9 @@ namespace MdsPaint.View
             this.ribbonOrbMenuItemExit = new System.Windows.Forms.RibbonOrbMenuItem();
             this.ribbonButtonUndo = new System.Windows.Forms.RibbonButton();
             this.ribbonButtonRedo = new System.Windows.Forms.RibbonButton();
+            this.ribbonTabDrawing = new System.Windows.Forms.RibbonTab();
+            this.ribbonPanelColorPicking = new System.Windows.Forms.RibbonPanel();
+            this.ribbonColorChooser = new System.Windows.Forms.RibbonColorChooser();
             this.ribbonTabPlugins = new System.Windows.Forms.RibbonTab();
             this.ribbonPanelPlugins = new System.Windows.Forms.RibbonPanel();
             this.ribbonButtonPlugins = new System.Windows.Forms.RibbonButton();
@@ -45,13 +48,14 @@ namespace MdsPaint.View
             this.rbtSaveFile = new System.Windows.Forms.RibbonButton();
             this.rbtLoadFile = new System.Windows.Forms.RibbonButton();
             this.ribbonButton2 = new System.Windows.Forms.RibbonButton();
+            this.ribbonPanel1 = new System.Windows.Forms.RibbonPanel();
+            this.ribbonButton1 = new System.Windows.Forms.RibbonButton();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLocationLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.paintingArea = new System.Windows.Forms.Panel();
+            this.paintingArea = new MdsPanel();//System.Windows.Forms.Panel();
             this.panelPaintContainer = new System.Windows.Forms.Panel();
-            this.ribbonPanel1 = new System.Windows.Forms.RibbonPanel();
-            this.ribbonButton1 = new System.Windows.Forms.RibbonButton();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.statusStrip.SuspendLayout();
             this.panelPaintContainer.SuspendLayout();
             this.SuspendLayout();
@@ -81,6 +85,7 @@ namespace MdsPaint.View
             this.ribbon.QuickAcessToolbar.Items.Add(this.ribbonButtonRedo);
             this.ribbon.Size = new System.Drawing.Size(810, 155);
             this.ribbon.TabIndex = 1;
+            this.ribbon.Tabs.Add(this.ribbonTabDrawing);
             this.ribbon.Tabs.Add(this.ribbonTabPlugins);
             this.ribbon.Tabs.Add(this.ribbonTabActions);
             this.ribbon.TabsMargin = new System.Windows.Forms.Padding(12, 26, 20, 0);
@@ -123,6 +128,23 @@ namespace MdsPaint.View
             this.ribbonButtonRedo.SmallImage = global::MdsPaint.Properties.Resources.arrow_redo16;
             this.ribbonButtonRedo.Text = "ribbonButton1";
             this.ribbonButtonRedo.Click += new System.EventHandler(this.ribbonButtonRedo_Click);
+            // 
+            // ribbonTabDrawing
+            // 
+            this.ribbonTabDrawing.Panels.Add(this.ribbonPanelColorPicking);
+            this.ribbonTabDrawing.Text = "Drawing";
+            // 
+            // ribbonPanelColorPicking
+            // 
+            this.ribbonPanelColorPicking.Items.Add(this.ribbonColorChooser);
+            this.ribbonPanelColorPicking.Text = "Colors";
+            // 
+            // ribbonColorChooser
+            // 
+            this.ribbonColorChooser.Color = System.Drawing.Color.Transparent;            
+            this.ribbonColorChooser.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonColorChooser.SmallImage")));
+            this.ribbonColorChooser.Text = "Color Chooser";
+            this.ribbonColorChooser.Click += new System.EventHandler(this.ribbonColorChooser_Click);
             // 
             // ribbonTabPlugins
             // 
@@ -174,6 +196,18 @@ namespace MdsPaint.View
             this.ribbonButton2.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton2.SmallImage")));
             this.ribbonButton2.Text = "ribbonButton2";
             // 
+            // ribbonPanel1
+            // 
+            this.ribbonPanel1.Items.Add(this.ribbonButton1);
+            this.ribbonPanel1.Text = "ribbonPanel1";
+            // 
+            // ribbonButton1
+            // 
+            this.ribbonButton1.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButton1.Image")));
+            this.ribbonButton1.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton1.SmallImage")));
+            this.ribbonButton1.Text = "ribbonButton1";
+            this.ribbonButton1.Click += new System.EventHandler(this.ribbonButton1_Click);
+            // 
             // statusStrip
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -210,8 +244,11 @@ namespace MdsPaint.View
             this.paintingArea.Size = new System.Drawing.Size(281, 223);
             this.paintingArea.TabIndex = 3;
             this.paintingArea.Paint += new System.Windows.Forms.PaintEventHandler(this.paintingArea_Paint);
+            this.paintingArea.MouseClick += new System.Windows.Forms.MouseEventHandler(this.paintingArea_MouseClick);
+            this.paintingArea.MouseDown += new System.Windows.Forms.MouseEventHandler(this.paintingArea_MouseDown);
             this.paintingArea.MouseLeave += new System.EventHandler(this.pbPaintingArea_MouseLeave);
             this.paintingArea.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbPaintingArea_MouseMove);
+            this.paintingArea.MouseUp += new System.Windows.Forms.MouseEventHandler(this.paintingArea_MouseUp);
             // 
             // panelPaintContainer
             // 
@@ -225,18 +262,6 @@ namespace MdsPaint.View
             this.panelPaintContainer.Size = new System.Drawing.Size(786, 333);
             this.panelPaintContainer.TabIndex = 4;
             this.panelPaintContainer.MouseEnter += new System.EventHandler(this.panelPaintContainer_MouseEnter);
-            // 
-            // ribbonPanel1
-            // 
-            this.ribbonPanel1.Items.Add(this.ribbonButton1);
-            this.ribbonPanel1.Text = "ribbonPanel1";
-            // 
-            // ribbonButton1
-            // 
-            this.ribbonButton1.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButton1.Image")));
-            this.ribbonButton1.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton1.SmallImage")));
-            this.ribbonButton1.Text = "ribbonButton1";
-            this.ribbonButton1.Click += new System.EventHandler(this.ribbonButton1_Click);
             // 
             // PaintForm
             // 
@@ -281,6 +306,10 @@ namespace MdsPaint.View
         private Panel panelPaintContainer;
         private RibbonPanel ribbonPanel1;
         private RibbonButton ribbonButton1;
+        private RibbonTab ribbonTabDrawing;
+        private RibbonPanel ribbonPanelColorPicking;
+        private RibbonColorChooser ribbonColorChooser;
+        private ColorDialog colorDialog1;
     }
 }
 

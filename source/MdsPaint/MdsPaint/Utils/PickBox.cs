@@ -38,8 +38,8 @@ namespace MdsPaint.Utils
         private readonly Label _lbl = new Label();
         private int startw;
         private int starth;
-        private int startx;
-        private int starty;
+        //private int startx;
+        //private int starty;
         private bool dragging;
         private Cursor oldCursor;
 

@@ -4,7 +4,7 @@ using MdsPaint.Utils;
 
 namespace MdsPaint.View
 {
-    public partial class PaintForm
+    public sealed partial class PaintForm
     {
         private void ribbonOrbMenuItemExit_Click(object sender, EventArgs e)
         {
@@ -16,10 +16,7 @@ namespace MdsPaint.View
             FileUtils.LoadImageFileToMainPanel(this);
         }
 
-        private void pbPaintingArea_MouseMove(object sender, MouseEventArgs e)
-        {
-            StatusLogger.LogLocation(this, e.Location);
-        }
+       
 
         private void pbPaintingArea_MouseLeave(object sender, EventArgs e)
         {

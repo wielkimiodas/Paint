@@ -64,6 +64,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MdsPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="PluginManagment\MdsPaintPluginBase.cs" />
     <Compile Include="PluginManagment\PluginImporter.cs" />
     <Compile Include="Program.cs" />

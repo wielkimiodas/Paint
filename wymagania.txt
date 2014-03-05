@@ -30,3 +30,4 @@ Uwagi dotycz¹ce projektu i implementacji programu:
 - operacje d³ugotrwa³e (np. na ca³ym obrazie) powinny byæ realizowane
   w osobnych w¹tkach, aby nie powodowa³y zak³óceñ w funkcjonowaniu
   interfejsu u¿ytkownika
+bc6edf5a1aac0a0326242d6a3ee97291
