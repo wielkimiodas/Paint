@@ -7,11 +7,30 @@ using System.Windows.Forms;
 
 namespace MdsPaint.Utils
 {
+    public class ResizeEventArgs : EventArgs
+    {
+        public Size NewSize { get; set; }
+    }
+
     public class PickBox
     {
         //////////////////////////////////////////////////////////////////
         // PRIVATE CONSTANTS AND VARIABLES
         //////////////////////////////////////////////////////////////////
+
+        public delegate void PropertyChangeHandler(object sender, ResizeEventArgs data);
+        
+        public event PropertyChangeHandler PropertyChange;
+        // The method which fires the Event
+        protected void OnPropertyChange(object sender, ResizeEventArgs data)
+        {
+            // Check if there are any Subscribers
+            if (PropertyChange != null)
+            {
+                // Call the Event
+                PropertyChange(this, data);
+            }
+        }
 
         private const int BoxSize = 8;
         private readonly Color _boxColor = Color.White;
@@ -23,6 +42,8 @@ namespace MdsPaint.Utils
         private int starty;
         private bool dragging;
         private Cursor oldCursor;
+
+        public Size Size { get; set; }
 
         private const int MIN_SIZE = 20;
 
@@ -161,6 +182,7 @@ namespace MdsPaint.Utils
             dragging = false;
             MoveHandles();
             ShowHandles();
+            OnPropertyChange(this,new ResizeEventArgs(){NewSize = new Size(_mControl.Width,_mControl.Height)});
         }
     }
 }

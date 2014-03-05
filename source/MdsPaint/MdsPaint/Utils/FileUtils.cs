@@ -45,6 +45,7 @@ namespace MdsPaint.Utils
             }
 
             form.MainBitmap = formatedBmp;
+            form.paintingArea.Size = form.MainBitmap.Size;
             form.paintingArea.Invalidate();
         }
     }

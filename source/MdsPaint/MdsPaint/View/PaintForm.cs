@@ -31,6 +31,25 @@ namespace MdsPaint.View
 
             var pb = new PickBox();
             pb.WireControl(paintingArea);
+            pb.PropertyChange += pb_PropertyChange;
+            paintingArea.Size = MainBitmap.Size;
+            paintingArea.Refresh();
+        }
+
+        void pb_PropertyChange(object sender, ResizeEventArgs data)
+        {
+            var newbmp = new Bitmap(data.NewSize.Width, data.NewSize.Height);
+
+            for (int i = 0; i < data.NewSize.Width; i++)
+            {
+                for (int j = 0; j < data.NewSize.Height; j++)
+                {
+                    if (i < MainBitmap.Size.Width && j < MainBitmap.Size.Height)
+                        newbmp.SetPixel(i, j, MainBitmap.GetPixel(i, j));
+                }
+            }
+            MainBitmap = newbmp;
+            paintingArea.Refresh();
         }
 
         protected override void OnClosed(EventArgs e)
@@ -43,8 +62,7 @@ namespace MdsPaint.View
 
         private void paintingArea_Paint(object sender, PaintEventArgs e)
         {
-            _history.Push(MainBitmap);
-        //    paintingArea.Size = MainBitmap.Size;
+            //   _history.Push(MainBitmap);
             e.Graphics.DrawImageUnscaled(MainBitmap, Point.Empty);
         }
 
@@ -86,6 +104,6 @@ namespace MdsPaint.View
             }
         }
 
-        
+
     }
 }
