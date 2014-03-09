@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.OleDb;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using System.Windows.Forms.RibbonHelpers;
 using MdsPaint.PluginManagment;
+using MdsPaint.Shapes;
 using MdsPaint.Utils;
 
 namespace MdsPaint.View
@@ -11,9 +14,12 @@ namespace MdsPaint.View
     public sealed partial class PaintForm : Form
     {
         private Color _currentColor = Color.Black;
+        private Pen pen = new Pen(Color.Black);
         private IEnumerable<MdsPaintPluginBase> plugins;
         public Bitmap MainBitmap;
         private Stack<Bitmap> _history = new Stack<Bitmap>();
+        private bool _drawing;
+        private Bitmap oldBmp;
 
         private readonly Size _initialMainBitmapSize = new Size(100, 100);
 
@@ -22,6 +28,7 @@ namespace MdsPaint.View
             InitializeComponent();
             statusStrip.BringToFront();
             this.DoubleBuffered = true;
+            SetStyle(ControlStyles.ResizeRedraw,false);
             MainBitmap = new Bitmap(_initialMainBitmapSize.Width, _initialMainBitmapSize.Height);
             using (var graphics = Graphics.FromImage(MainBitmap))
             {
@@ -36,6 +43,7 @@ namespace MdsPaint.View
             pb.PropertyChange += pb_PropertyChange;
             paintingArea.Size = MainBitmap.Size;
             paintingArea.Refresh();
+            oldBmp = MainBitmap;
         }
 
         void pb_PropertyChange(object sender, ResizeEventArgs data)
@@ -55,6 +63,7 @@ namespace MdsPaint.View
                 }
             }
             MainBitmap = newbmp;
+            oldBmp = newbmp;
             paintingArea.Refresh();
         }
 
@@ -65,8 +74,6 @@ namespace MdsPaint.View
             //if (res == DialogResult.Yes)
             //    Close();
         }
-
-      
 
         private void ImportPlugins()
         {
@@ -106,74 +113,82 @@ namespace MdsPaint.View
             }
         }
 
-        private void paintingArea_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
         private void pbPaintingArea_MouseMove(object sender, MouseEventArgs e)
         {
             StatusLogger.LogLocation(this, e.Location);
             currentPosition = e.Location;
-            if (painting)
+            if (_drawing)
             {
-                //using (var graphics = Graphics.FromImage(MainBitmap))
-                //{
-                //    graphics.DrawRectangle(new Pen(_currentColor), startPosition.X, startPosition.Y, e.X - startPosition.X, e.Y - startPosition.Y);
-                //}
                 paintingArea.Invalidate();
             }
         }
-
+        
         private void paintingArea_Paint(object sender, PaintEventArgs e)
         {
+            //MainBitmap = (Bitmap)oldBmp.Clone();
+            var oldbmp = MainBitmap.Clone();
+            if (_drawing) 
+                currentShape.Draw(MainBitmap,pen,startPosition,currentPosition);
+            
             e.Graphics.DrawImageUnscaled(MainBitmap, Point.Empty);
-            var pen = new Pen(_currentColor);
-            if (rectangles.Count > 0) e.Graphics.DrawRectangles(pen, rectangles.ToArray());
-            if (painting) e.Graphics.DrawRectangle(pen, getRectangle());
-
+            MainBitmap = (Bitmap)oldBmp.Clone();
             //   _history.Push(MainBitmap);
         }
 
-        private Rectangle getRectangle()
-        {
-            return new Rectangle(
-                Math.Min(startPosition.X, currentPosition.X),
-                Math.Min(startPosition.Y, currentPosition.Y),
-                Math.Abs(startPosition.X - currentPosition.X),
-                Math.Abs(startPosition.Y - currentPosition.Y));
-        }
-        List<Rectangle> rectangles = new List<Rectangle>(); 
+        private Rectangle currRect;
         private Point startPosition;
         private Point currentPosition;
-        private bool painting;
+        
         private void paintingArea_MouseDown(object sender, MouseEventArgs e)
         {
             currentPosition=startPosition = new Point(e.X,e.Y);
-            painting = true;
+            oldBmp = (Bitmap)MainBitmap;//.Clone();
+            _drawing = true;
         }
+        private Shape currentShape = new MdsRect();
 
         private void paintingArea_MouseUp(object sender, MouseEventArgs e)
         {
-            if (painting)
+            if (_drawing)
             {
-                painting = false;
-                var rc = getRectangle();
-                if (rc.Width > 0 && rc.Height > 0) rectangles.Add(rc);
-                paintingArea.Invalidate();
+                _drawing = false;
             }
-            
+
+            currentShape.Draw(MainBitmap,pen,startPosition,currentPosition);
+            oldBmp = MainBitmap;
+            //using (var gfx = Graphics.FromImage(MainBitmap))
+            //{
+
+            //    gfx.DrawPolygon(pen,);
+            //    //gfx.DrawRectangle(pen,currRect);
+            //}
+            paintingArea.Invalidate();
         }
 
         private void ribbonColorChooser_Click(object sender, EventArgs e)
         {
-            var res = colorDialog1.ShowDialog();
+            var res = colorDialog.ShowDialog();
             if (res == DialogResult.OK)
             {
-                _currentColor = colorDialog1.Color;
+                _currentColor = colorDialog.Color;
+                ribbonColorChooser.Color = colorDialog.Color;
+                pen.Color = _currentColor;
             }
         }
-        
 
+        private void paintingArea_MouseClick(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void ribbonButtonEllipse_Click(object sender, EventArgs e)
+        {
+            currentShape = new MdsEllipse();
+        }
+
+        private void ribbonButtonRectangle_Click(object sender, EventArgs e)
+        {
+            currentShape = new MdsRect();
+        }
     }
 }
