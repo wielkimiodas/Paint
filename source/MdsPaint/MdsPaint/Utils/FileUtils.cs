@@ -31,10 +31,10 @@ namespace MdsPaint.Utils
             }
         }
 
-        public static void LoadImageFileToMainPanel(PaintForm form)
+        public static Bitmap LoadImageFile()
         {
             var path = GetBmpFilePath();
-            if (string.IsNullOrEmpty(path)) return;
+            if (string.IsNullOrEmpty(path)) return null;
 
             var bmp = new Bitmap(path);
             var formatedBmp = new Bitmap(bmp.Width, bmp.Height, PixelFormat.Format32bppArgb);
@@ -44,9 +44,11 @@ namespace MdsPaint.Utils
                 gfx.DrawImage(bmp, 0, 0);
             }
 
-            form.MainBitmap = formatedBmp;
-            form.paintingArea.Size = form.MainBitmap.Size;
-            form.paintingArea.Invalidate();
+            return formatedBmp;
+            //form.MainBitmap = formatedBmp;
+            //form.OverwritePanel(formatedBmp);
+            //form.paintingArea.Size = form.MainBitmap.Size;
+            //form.paintingArea.Invalidate();
         }
     }
 }

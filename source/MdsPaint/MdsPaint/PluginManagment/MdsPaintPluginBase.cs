@@ -44,8 +44,8 @@ namespace MdsPaint.PluginManagment
             var res = plugin.ProcessBitmap(plugin.PaintFormPointer.MainBitmap);
             var changeImgAction = new Action(() => plugin.PaintFormPointer.OverwritePanel(res));
 
-            var asyncImgChange = plugin.PaintFormPointer.paintingArea.BeginInvoke(changeImgAction);
-            plugin.PaintFormPointer.paintingArea.EndInvoke(asyncImgChange);
+            var asyncImgChange = plugin.PaintFormPointer.BeginInvoke(changeImgAction);
+            plugin.PaintFormPointer.EndInvoke(asyncImgChange);
             plugin.PaintFormPointer.EnableRibbon(true);
         }
     }

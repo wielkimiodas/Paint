@@ -341,11 +341,11 @@ namespace MdsPaint.View
         private RibbonPanel ribbonPanelColorPicking;
         private RibbonColorChooser ribbonColorChooser;
         private ColorDialog colorDialog;
-        public MdsPanel paintingArea;
         private RibbonPanel ribbonPanelShapes;
         private RibbonButton ribbonButtonEllipse;
         private RibbonButton ribbonButton4;
         private RibbonButton ribbonButtonRectangle;
+        private MdsPanel paintingArea;
     }
 }
 

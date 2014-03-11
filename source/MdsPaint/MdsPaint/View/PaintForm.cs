@@ -19,7 +19,7 @@ namespace MdsPaint.View
         public Bitmap MainBitmap;
         private Stack<Bitmap> _history = new Stack<Bitmap>();
         private bool _drawing;
-        private Bitmap oldBmp;
+        private Bitmap _oldBmp;
 
         private readonly Size _initialMainBitmapSize = new Size(100, 100);
 
@@ -27,7 +27,7 @@ namespace MdsPaint.View
         {
             InitializeComponent();
             statusStrip.BringToFront();
-            this.DoubleBuffered = true;
+            DoubleBuffered = true;
             SetStyle(ControlStyles.ResizeRedraw,false);
             MainBitmap = new Bitmap(_initialMainBitmapSize.Width, _initialMainBitmapSize.Height);
             using (var graphics = Graphics.FromImage(MainBitmap))
@@ -43,7 +43,7 @@ namespace MdsPaint.View
             pb.PropertyChange += pb_PropertyChange;
             paintingArea.Size = MainBitmap.Size;
             paintingArea.Refresh();
-            oldBmp = MainBitmap;
+            _oldBmp = MainBitmap;
         }
 
         void pb_PropertyChange(object sender, ResizeEventArgs data)
@@ -63,7 +63,7 @@ namespace MdsPaint.View
                 }
             }
             MainBitmap = newbmp;
-            oldBmp = newbmp;
+            _oldBmp = newbmp;
             paintingArea.Refresh();
         }
 
@@ -99,6 +99,7 @@ namespace MdsPaint.View
         public void OverwritePanel(Bitmap bmp)
         {
             MainBitmap = bmp;
+            paintingArea.Size = MainBitmap.Size;
             paintingArea.Refresh();
         }
 
@@ -125,13 +126,12 @@ namespace MdsPaint.View
         
         private void paintingArea_Paint(object sender, PaintEventArgs e)
         {
-            //MainBitmap = (Bitmap)oldBmp.Clone();
-            var oldbmp = MainBitmap.Clone();
+            _oldBmp = (Bitmap)MainBitmap.Clone();
             if (_drawing) 
                 currentShape.Draw(MainBitmap,pen,startPosition,currentPosition);
             
             e.Graphics.DrawImageUnscaled(MainBitmap, Point.Empty);
-            MainBitmap = (Bitmap)oldBmp.Clone();
+            MainBitmap = (Bitmap)_oldBmp.Clone();
             //   _history.Push(MainBitmap);
         }
 
@@ -142,7 +142,7 @@ namespace MdsPaint.View
         private void paintingArea_MouseDown(object sender, MouseEventArgs e)
         {
             currentPosition=startPosition = new Point(e.X,e.Y);
-            oldBmp = (Bitmap)MainBitmap;//.Clone();
+            _oldBmp = (Bitmap)MainBitmap;//.Clone();
             _drawing = true;
         }
         private Shape currentShape = new MdsRect();
@@ -155,14 +155,10 @@ namespace MdsPaint.View
             }
 
             currentShape.Draw(MainBitmap,pen,startPosition,currentPosition);
-            oldBmp = MainBitmap;
-            //using (var gfx = Graphics.FromImage(MainBitmap))
-            //{
+            _oldBmp = MainBitmap;
 
-            //    gfx.DrawPolygon(pen,);
-            //    //gfx.DrawRectangle(pen,currRect);
-            //}
             paintingArea.Invalidate();
+            startPosition = Point.Empty;
         }
 
         private void ribbonColorChooser_Click(object sender, EventArgs e)
@@ -190,5 +186,6 @@ namespace MdsPaint.View
         {
             currentShape = new MdsRect();
         }
+
     }
 }

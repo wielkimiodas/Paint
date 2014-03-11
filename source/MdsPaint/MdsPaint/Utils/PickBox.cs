@@ -66,6 +66,7 @@ namespace MdsPaint.Utils
             _lbl.MouseDown += lbl_MouseDown;
             _lbl.MouseMove += lbl_MouseMove;
             _lbl.MouseUp += lbl_MouseUp;
+            
         }
 
         //////////////////////////////////////////////////////////////////
@@ -79,6 +80,7 @@ namespace MdsPaint.Utils
         public void WireControl(Control ctl)
         {
             ctl.Click += SelectControl;
+            //ShowHandles();
         }
 
         /////////////////////////////////////////////////////////////////

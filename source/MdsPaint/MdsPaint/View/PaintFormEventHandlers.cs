@@ -13,10 +13,9 @@ namespace MdsPaint.View
 
         private void rbtLoadFile_Click(object sender, EventArgs e)
         {
-            FileUtils.LoadImageFileToMainPanel(this);
+            var bmp = FileUtils.LoadImageFile();
+            OverwritePanel(bmp);
         }
-
-       
 
         private void pbPaintingArea_MouseLeave(object sender, EventArgs e)
         {
