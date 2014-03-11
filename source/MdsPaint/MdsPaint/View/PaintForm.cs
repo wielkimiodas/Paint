@@ -195,6 +195,7 @@ namespace MdsPaint.View
 
         private void ribbonColorChooserFilling_Click(object sender, EventArgs e)
         {
+            e.
             //ColorDialog cd;
         }
 
