@@ -13,15 +13,15 @@ namespace MdsPaint.View
 {
     public sealed partial class PaintForm : Form
     {
-        private Color _currentColor = Color.Black;
-        private Pen pen = new Pen(Color.Black);
+        private Shape _currentShape = new MdsRect();
+        private readonly Pen _pen = new Pen(Color.Black);
         private IEnumerable<MdsPaintPluginBase> plugins;
         public Bitmap MainBitmap;
         private Stack<Bitmap> _history = new Stack<Bitmap>();
         private bool _drawing;
         private Bitmap _oldBmp;
 
-        private readonly Size _initialMainBitmapSize = new Size(100, 100);
+        private readonly Size _initialMainBitmapSize = new Size(600, 300);
 
         public PaintForm()
         {
@@ -128,7 +128,7 @@ namespace MdsPaint.View
         {
             _oldBmp = (Bitmap)MainBitmap.Clone();
             if (_drawing) 
-                currentShape.Draw(MainBitmap,pen,startPosition,currentPosition);
+                _currentShape.Draw(MainBitmap,_pen,startPosition,currentPosition);
             
             e.Graphics.DrawImageUnscaled(MainBitmap, Point.Empty);
             MainBitmap = (Bitmap)_oldBmp.Clone();
@@ -145,7 +145,7 @@ namespace MdsPaint.View
             _oldBmp = (Bitmap)MainBitmap;//.Clone();
             _drawing = true;
         }
-        private Shape currentShape = new MdsRect();
+        
 
         private void paintingArea_MouseUp(object sender, MouseEventArgs e)
         {
@@ -154,7 +154,7 @@ namespace MdsPaint.View
                 _drawing = false;
             }
 
-            currentShape.Draw(MainBitmap,pen,startPosition,currentPosition);
+            _currentShape.Draw(MainBitmap,_pen,startPosition,currentPosition);
             _oldBmp = MainBitmap;
 
             paintingArea.Invalidate();
@@ -166,26 +166,39 @@ namespace MdsPaint.View
             var res = colorDialog.ShowDialog();
             if (res == DialogResult.OK)
             {
-                _currentColor = colorDialog.Color;
-                ribbonColorChooser.Color = colorDialog.Color;
-                pen.Color = _currentColor;
+                _pen.Color = colorDialog.Color;
+                //_currentColor = 
+                ribbonColorChooserBorder.Color = colorDialog.Color;
+                //pen.Color = _currentColor;
             }
         }
 
-        private void paintingArea_MouseClick(object sender, MouseEventArgs e)
+        private void pbPaintingArea_MouseLeave(object sender, EventArgs e)
         {
-
+            StatusLogger.LogLocation(this, null);
         }
 
-        private void ribbonButtonEllipse_Click(object sender, EventArgs e)
+        private void ribbonComboBoxThickness_DropDownItemClicked(object sender, RibbonItemEventArgs e)
         {
-            currentShape = new MdsEllipse();
+            _pen.Width = Convert.ToSingle(e.Item.Value);
         }
 
-        private void ribbonButtonRectangle_Click(object sender, EventArgs e)
+        private void rbShapeEllipse_Click(object sender, EventArgs e)
         {
-            currentShape = new MdsRect();
+            _currentShape = new MdsEllipse();
         }
 
+        private void rbShapeRectangle_Click(object sender, EventArgs e)
+        {
+            _currentShape = new MdsRect();
+        }
+
+        private void ribbonColorChooserFilling_Click(object sender, EventArgs e)
+        {
+            //ColorDialog cd;
+        }
+
+
+        
     }
 }

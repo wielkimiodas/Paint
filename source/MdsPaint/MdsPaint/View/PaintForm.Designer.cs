@@ -39,11 +39,23 @@ namespace MdsPaint.View
             this.ribbonButtonRedo = new System.Windows.Forms.RibbonButton();
             this.ribbonTabDrawing = new System.Windows.Forms.RibbonTab();
             this.ribbonPanelColorPicking = new System.Windows.Forms.RibbonPanel();
-            this.ribbonColorChooser = new System.Windows.Forms.RibbonColorChooser();
+            this.ribbonColorChooserBorder = new System.Windows.Forms.RibbonColorChooser();
+            this.ribbonColorChooserFilling = new System.Windows.Forms.RibbonColorChooser();
             this.ribbonPanelShapes = new System.Windows.Forms.RibbonPanel();
-            this.ribbonButtonEllipse = new System.Windows.Forms.RibbonButton();
+            this.ribbonButtonList1 = new System.Windows.Forms.RibbonButtonList();
+            this.rbShapeEllipse = new System.Windows.Forms.RibbonButton();
+            this.rbShapeRectangle = new System.Windows.Forms.RibbonButton();
+            this.ribbonButton6 = new System.Windows.Forms.RibbonButton();
+            this.ribbonButton7 = new System.Windows.Forms.RibbonButton();
+            this.ribbonPanelPenStyles = new System.Windows.Forms.RibbonPanel();
+            this.ribbonComboBoxThickness = new System.Windows.Forms.RibbonComboBox();
+            this.rbThicknessThin = new System.Windows.Forms.RibbonButton();
+            this.rbThicknessNormal = new System.Windows.Forms.RibbonButton();
+            this.rbThicknessWide = new System.Windows.Forms.RibbonButton();
+            this.ribbonSeparator1 = new System.Windows.Forms.RibbonSeparator();
+            this.ribbonButtonList2 = new System.Windows.Forms.RibbonButtonList();
+            this.ribbonButton3 = new System.Windows.Forms.RibbonButton();
             this.ribbonButton4 = new System.Windows.Forms.RibbonButton();
-            this.ribbonButtonRectangle = new System.Windows.Forms.RibbonButton();
             this.ribbonTabPlugins = new System.Windows.Forms.RibbonTab();
             this.ribbonPanelPlugins = new System.Windows.Forms.RibbonPanel();
             this.ribbonButtonPlugins = new System.Windows.Forms.RibbonButton();
@@ -57,9 +69,10 @@ namespace MdsPaint.View
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLocationLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.paintingArea = new MdsPaint.MdsPanel();
             this.panelPaintContainer = new System.Windows.Forms.Panel();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
+            this.ribbonCheckBoxFilling = new System.Windows.Forms.RibbonCheckBox();
+            this.paintingArea = new MdsPaint.MdsPanel();
             this.statusStrip.SuspendLayout();
             this.panelPaintContainer.SuspendLayout();
             this.SuspendLayout();
@@ -137,47 +150,138 @@ namespace MdsPaint.View
             // 
             this.ribbonTabDrawing.Panels.Add(this.ribbonPanelColorPicking);
             this.ribbonTabDrawing.Panels.Add(this.ribbonPanelShapes);
+            this.ribbonTabDrawing.Panels.Add(this.ribbonPanelPenStyles);
             this.ribbonTabDrawing.Text = "Drawing";
             // 
             // ribbonPanelColorPicking
             // 
-            this.ribbonPanelColorPicking.Items.Add(this.ribbonColorChooser);
+            this.ribbonPanelColorPicking.Items.Add(this.ribbonColorChooserBorder);
+            this.ribbonPanelColorPicking.Items.Add(this.ribbonColorChooserFilling);
+            this.ribbonPanelColorPicking.Items.Add(this.ribbonCheckBoxFilling);
             this.ribbonPanelColorPicking.Text = "Colors";
             // 
-            // ribbonColorChooser
+            // ribbonColorChooserBorder
             // 
-            this.ribbonColorChooser.Color = System.Drawing.Color.Black;
-            this.ribbonColorChooser.Image = ((System.Drawing.Image)(resources.GetObject("ribbonColorChooser.Image")));
-            this.ribbonColorChooser.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonColorChooser.SmallImage")));
-            this.ribbonColorChooser.Text = "Color Chooser";
-            this.ribbonColorChooser.Click += new System.EventHandler(this.ribbonColorChooser_Click);
+            this.ribbonColorChooserBorder.Color = System.Drawing.Color.Black;
+            this.ribbonColorChooserBorder.Image = ((System.Drawing.Image)(resources.GetObject("ribbonColorChooserBorder.Image")));
+            this.ribbonColorChooserBorder.ImageColorHeight = 20;
+            this.ribbonColorChooserBorder.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonColorChooserBorder.SmallImage")));
+            this.ribbonColorChooserBorder.Text = "Border";
+            this.ribbonColorChooserBorder.Click += new System.EventHandler(this.ribbonColorChooser_Click);
+            // 
+            // ribbonColorChooserFilling
+            // 
+            this.ribbonColorChooserFilling.CheckOnClick = true;
+            this.ribbonColorChooserFilling.Color = System.Drawing.Color.Transparent;
+            this.ribbonColorChooserFilling.Image = ((System.Drawing.Image)(resources.GetObject("ribbonColorChooserFilling.Image")));
+            this.ribbonColorChooserFilling.ImageColorHeight = 20;
+            this.ribbonColorChooserFilling.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonColorChooserFilling.SmallImage")));
+            this.ribbonColorChooserFilling.Text = "Filling";
+            this.ribbonColorChooserFilling.Click += new System.EventHandler(this.ribbonColorChooserFilling_Click);
             // 
             // ribbonPanelShapes
             // 
-            this.ribbonPanelShapes.Items.Add(this.ribbonButtonEllipse);
-            this.ribbonPanelShapes.Items.Add(this.ribbonButtonRectangle);
+            this.ribbonPanelShapes.Items.Add(this.ribbonButtonList1);
             this.ribbonPanelShapes.Text = "Shapes";
             // 
-            // ribbonButtonEllipse
+            // ribbonButtonList1
             // 
-            this.ribbonButtonEllipse.DropDownItems.Add(this.ribbonButton4);
-            this.ribbonButtonEllipse.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButtonEllipse.Image")));
-            this.ribbonButtonEllipse.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButtonEllipse.SmallImage")));
-            this.ribbonButtonEllipse.Text = "Ellipse";
-            this.ribbonButtonEllipse.Click += new System.EventHandler(this.ribbonButtonEllipse_Click);
+            this.ribbonButtonList1.Buttons.Add(this.rbShapeEllipse);
+            this.ribbonButtonList1.Buttons.Add(this.rbShapeRectangle);
+            this.ribbonButtonList1.Buttons.Add(this.ribbonButton6);
+            this.ribbonButtonList1.Buttons.Add(this.ribbonButton7);
+            this.ribbonButtonList1.ButtonsSizeMode = System.Windows.Forms.RibbonElementSizeMode.Compact;
+            this.ribbonButtonList1.FlowToBottom = false;
+            this.ribbonButtonList1.ItemsSizeInDropwDownMode = new System.Drawing.Size(7, 5);
+            this.ribbonButtonList1.Text = "ribbonButtonList1";
+            // 
+            // rbShapeEllipse
+            // 
+            this.rbShapeEllipse.Image = ((System.Drawing.Image)(resources.GetObject("rbShapeEllipse.Image")));
+            this.rbShapeEllipse.MaximumSize = new System.Drawing.Size(32, 32);
+            this.rbShapeEllipse.SmallImage = global::MdsPaint.Properties.Resources._14_ellipse;
+            this.rbShapeEllipse.Text = "ribbonButton3";
+            this.rbShapeEllipse.Click += new System.EventHandler(this.rbShapeEllipse_Click);
+            // 
+            // rbShapeRectangle
+            // 
+            this.rbShapeRectangle.Image = ((System.Drawing.Image)(resources.GetObject("rbShapeRectangle.Image")));
+            this.rbShapeRectangle.MaximumSize = new System.Drawing.Size(32, 32);
+            this.rbShapeRectangle.SmallImage = global::MdsPaint.Properties.Resources._14_rectangle;
+            this.rbShapeRectangle.Text = "ribbonButton5";
+            this.rbShapeRectangle.Click += new System.EventHandler(this.rbShapeRectangle_Click);
+            // 
+            // ribbonButton6
+            // 
+            this.ribbonButton6.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButton6.Image")));
+            this.ribbonButton6.MaximumSize = new System.Drawing.Size(32, 32);
+            this.ribbonButton6.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton6.SmallImage")));
+            this.ribbonButton6.Text = "ribbonButton6";
+            // 
+            // ribbonButton7
+            // 
+            this.ribbonButton7.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButton7.Image")));
+            this.ribbonButton7.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton7.SmallImage")));
+            this.ribbonButton7.Text = "ribbonButton7";
+            // 
+            // ribbonPanelPenStyles
+            // 
+            this.ribbonPanelPenStyles.Items.Add(this.ribbonComboBoxThickness);
+            this.ribbonPanelPenStyles.Items.Add(this.ribbonSeparator1);
+            this.ribbonPanelPenStyles.Items.Add(this.ribbonButtonList2);
+            this.ribbonPanelPenStyles.Text = "Pen styles";
+            // 
+            // ribbonComboBoxThickness
+            // 
+            this.ribbonComboBoxThickness.AllowTextEdit = false;
+            this.ribbonComboBoxThickness.DropDownItems.Add(this.rbThicknessThin);
+            this.ribbonComboBoxThickness.DropDownItems.Add(this.rbThicknessNormal);
+            this.ribbonComboBoxThickness.DropDownItems.Add(this.rbThicknessWide);
+            this.ribbonComboBoxThickness.Text = "";
+            this.ribbonComboBoxThickness.TextBoxText = "Thin";
+            this.ribbonComboBoxThickness.DropDownItemClicked += new System.Windows.Forms.RibbonComboBox.RibbonItemEventHandler(this.ribbonComboBoxThickness_DropDownItemClicked);
+            // 
+            // rbThicknessThin
+            // 
+            this.rbThicknessThin.Image = global::MdsPaint.Properties.Resources.thin;
+            this.rbThicknessThin.SmallImage = global::MdsPaint.Properties.Resources.thin;
+            this.rbThicknessThin.Text = "Thin";
+            this.rbThicknessThin.Value = "1";
+            // 
+            // rbThicknessNormal
+            // 
+            this.rbThicknessNormal.Image = global::MdsPaint.Properties.Resources.normal;
+            this.rbThicknessNormal.SmallImage = global::MdsPaint.Properties.Resources.normal;
+            this.rbThicknessNormal.Text = "Normal";
+            this.rbThicknessNormal.Value = "3";
+            // 
+            // rbThicknessWide
+            // 
+            this.rbThicknessWide.Image = global::MdsPaint.Properties.Resources.wide;
+            this.rbThicknessWide.SmallImage = global::MdsPaint.Properties.Resources.wide;
+            this.rbThicknessWide.Text = "Wide";
+            this.rbThicknessWide.Value = "5";
+            // 
+            // ribbonButtonList2
+            // 
+            this.ribbonButtonList2.Buttons.Add(this.ribbonButton3);
+            this.ribbonButtonList2.Buttons.Add(this.ribbonButton4);
+            this.ribbonButtonList2.ButtonsSizeMode = System.Windows.Forms.RibbonElementSizeMode.Large;
+            this.ribbonButtonList2.FlowToBottom = false;
+            this.ribbonButtonList2.ItemsSizeInDropwDownMode = new System.Drawing.Size(7, 5);
+            this.ribbonButtonList2.Text = "ribbonButtonList2";
+            // 
+            // ribbonButton3
+            // 
+            this.ribbonButton3.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButton3.Image")));
+            this.ribbonButton3.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton3.SmallImage")));
+            this.ribbonButton3.Text = "ribbonButton3";
             // 
             // ribbonButton4
             // 
             this.ribbonButton4.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButton4.Image")));
             this.ribbonButton4.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton4.SmallImage")));
             this.ribbonButton4.Text = "ribbonButton4";
-            // 
-            // ribbonButtonRectangle
-            // 
-            this.ribbonButtonRectangle.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButtonRectangle.Image")));
-            this.ribbonButtonRectangle.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButtonRectangle.SmallImage")));
-            this.ribbonButtonRectangle.Text = "Rectangle";
-            this.ribbonButtonRectangle.Click += new System.EventHandler(this.ribbonButtonRectangle_Click);
             // 
             // ribbonTabPlugins
             // 
@@ -269,19 +373,6 @@ namespace MdsPaint.View
             this.toolStripStatusLabel.Size = new System.Drawing.Size(118, 17);
             this.toolStripStatusLabel.Text = "toolStripStatusLabel2";
             // 
-            // paintingArea
-            // 
-            this.paintingArea.BackColor = System.Drawing.Color.White;
-            this.paintingArea.Location = new System.Drawing.Point(3, 3);
-            this.paintingArea.Name = "paintingArea";
-            this.paintingArea.Size = new System.Drawing.Size(281, 223);
-            this.paintingArea.TabIndex = 3;
-            this.paintingArea.Paint += new System.Windows.Forms.PaintEventHandler(this.paintingArea_Paint);
-            this.paintingArea.MouseDown += new System.Windows.Forms.MouseEventHandler(this.paintingArea_MouseDown);
-            this.paintingArea.MouseLeave += new System.EventHandler(this.pbPaintingArea_MouseLeave);
-            this.paintingArea.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbPaintingArea_MouseMove);
-            this.paintingArea.MouseUp += new System.Windows.Forms.MouseEventHandler(this.paintingArea_MouseUp);
-            // 
             // panelPaintContainer
             // 
             this.panelPaintContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -294,6 +385,24 @@ namespace MdsPaint.View
             this.panelPaintContainer.Size = new System.Drawing.Size(786, 333);
             this.panelPaintContainer.TabIndex = 4;
             this.panelPaintContainer.MouseEnter += new System.EventHandler(this.panelPaintContainer_MouseEnter);
+            // 
+            // ribbonCheckBoxFilling
+            // 
+            this.ribbonCheckBoxFilling.MinSizeMode = System.Windows.Forms.RibbonElementSizeMode.Large;
+            this.ribbonCheckBoxFilling.Text = "Fill";
+            // 
+            // paintingArea
+            // 
+            this.paintingArea.BackColor = System.Drawing.Color.White;
+            this.paintingArea.Location = new System.Drawing.Point(3, 3);
+            this.paintingArea.Name = "paintingArea";
+            this.paintingArea.Size = new System.Drawing.Size(281, 223);
+            this.paintingArea.TabIndex = 3;
+            this.paintingArea.Paint += new System.Windows.Forms.PaintEventHandler(this.paintingArea_Paint);
+            this.paintingArea.MouseDown += new System.Windows.Forms.MouseEventHandler(this.paintingArea_MouseDown);
+            this.paintingArea.MouseLeave += new System.EventHandler(this.pbPaintingArea_MouseLeave);
+            this.paintingArea.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbPaintingArea_MouseMove);
+            this.paintingArea.MouseUp += new System.Windows.Forms.MouseEventHandler(this.paintingArea_MouseUp);
             // 
             // PaintForm
             // 
@@ -339,13 +448,26 @@ namespace MdsPaint.View
         private RibbonButton ribbonButton1;
         private RibbonTab ribbonTabDrawing;
         private RibbonPanel ribbonPanelColorPicking;
-        private RibbonColorChooser ribbonColorChooser;
+        private RibbonColorChooser ribbonColorChooserBorder;
         private ColorDialog colorDialog;
         private RibbonPanel ribbonPanelShapes;
-        private RibbonButton ribbonButtonEllipse;
-        private RibbonButton ribbonButton4;
-        private RibbonButton ribbonButtonRectangle;
         private MdsPanel paintingArea;
+        private RibbonPanel ribbonPanelPenStyles;
+        private RibbonComboBox ribbonComboBoxThickness;
+        private RibbonButton rbThicknessThin;
+        private RibbonButton rbThicknessNormal;
+        private RibbonButton rbThicknessWide;
+        private RibbonButtonList ribbonButtonList1;
+        private RibbonButton rbShapeEllipse;
+        private RibbonButton rbShapeRectangle;
+        private RibbonButton ribbonButton6;
+        private RibbonButton ribbonButton7;
+        private RibbonSeparator ribbonSeparator1;
+        private RibbonButtonList ribbonButtonList2;
+        private RibbonButton ribbonButton3;
+        private RibbonButton ribbonButton4;
+        private RibbonColorChooser ribbonColorChooserFilling;
+        private RibbonCheckBox ribbonCheckBoxFilling;
     }
 }
 

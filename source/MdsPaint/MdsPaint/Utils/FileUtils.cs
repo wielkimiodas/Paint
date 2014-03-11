@@ -43,12 +43,7 @@ namespace MdsPaint.Utils
             {
                 gfx.DrawImage(bmp, 0, 0);
             }
-
             return formatedBmp;
-            //form.MainBitmap = formatedBmp;
-            //form.OverwritePanel(formatedBmp);
-            //form.paintingArea.Size = form.MainBitmap.Size;
-            //form.paintingArea.Invalidate();
         }
     }
 }

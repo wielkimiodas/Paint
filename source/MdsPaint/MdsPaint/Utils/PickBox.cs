@@ -14,13 +14,19 @@ namespace MdsPaint.Utils
 
     public class PickBox
     {
-        //////////////////////////////////////////////////////////////////
-        // PRIVATE CONSTANTS AND VARIABLES
-        //////////////////////////////////////////////////////////////////
-
         public delegate void PropertyChangeHandler(object sender, ResizeEventArgs data);
-        
         public event PropertyChangeHandler PropertyChange;
+        private const int BoxSize = 8;
+        private readonly Color _boxColor = Color.White;
+        private Control _mControl;
+        private readonly Label _lbl = new Label();
+        private int startw;
+        private int starth;
+        private bool dragging;
+        private Cursor oldCursor;
+        public Size Size { get; set; }
+        private const int MIN_SIZE = 20;
+        
         // The method which fires the Event
         protected void OnPropertyChange(object sender, ResizeEventArgs data)
         {
@@ -31,21 +37,6 @@ namespace MdsPaint.Utils
                 PropertyChange(this, data);
             }
         }
-
-        private const int BoxSize = 8;
-        private readonly Color _boxColor = Color.White;
-        private Control _mControl;
-        private readonly Label _lbl = new Label();
-        private int startw;
-        private int starth;
-        //private int startx;
-        //private int starty;
-        private bool dragging;
-        private Cursor oldCursor;
-
-        public Size Size { get; set; }
-
-        private const int MIN_SIZE = 20;
 
         //
         // Constructor creates 8 sizing handles & wires mouse events
@@ -66,12 +57,7 @@ namespace MdsPaint.Utils
             _lbl.MouseDown += lbl_MouseDown;
             _lbl.MouseMove += lbl_MouseMove;
             _lbl.MouseUp += lbl_MouseUp;
-            
         }
-
-        //////////////////////////////////////////////////////////////////
-        // PUBLIC METHODS
-        //////////////////////////////////////////////////////////////////
 
         //
         // Wires a Click event handler to the passed Control
@@ -82,10 +68,6 @@ namespace MdsPaint.Utils
             ctl.Click += SelectControl;
             //ShowHandles();
         }
-
-        /////////////////////////////////////////////////////////////////
-        // PRIVATE METHODS
-        /////////////////////////////////////////////////////////////////
 
         //
         // Attaches a pick box to the sender Control
@@ -139,14 +121,8 @@ namespace MdsPaint.Utils
             _lbl.SetBounds(posX, posY, BoxSize, BoxSize);
         }
 
-        /////////////////////////////////////////////////////////////////
-        // MOUSE EVENTS THAT IMPLEMENT SIZING OF THE PICKED CONTROL
-        /////////////////////////////////////////////////////////////////
-
-        //
         // Store control position and size when mouse button pushed over
         // any sizing handle
-        //
         private void lbl_MouseDown(object sender, MouseEventArgs e)
         {
             dragging = true;
@@ -157,9 +133,9 @@ namespace MdsPaint.Utils
 
         private void lbl_MouseMove(object sender, MouseEventArgs e)
         {
-            int l = _mControl.Left;
+            //int l = _mControl.Left;
             int w = _mControl.Width;
-            int t = _mControl.Top;
+            //int t = _mControl.Top;
             int h = _mControl.Height;
             if (dragging)
             {
@@ -170,8 +146,8 @@ namespace MdsPaint.Utils
                         h = starth + e.Y > MIN_SIZE ? starth + e.Y : MIN_SIZE;
                         break;
                 }
-                l = (l < 0) ? 0 : l;
-                t = (t < 0) ? 0 : t;
+            //    l = (l < 0) ? 0 : l;
+              //  t = (t < 0) ? 0 : t;
                 _mControl.SetBounds(3, 3, w, h);
             }
         }

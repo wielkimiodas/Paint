@@ -17,10 +17,7 @@ namespace MdsPaint.View
             OverwritePanel(bmp);
         }
 
-        private void pbPaintingArea_MouseLeave(object sender, EventArgs e)
-        {
-            StatusLogger.LogLocation(this, null);
-        }
+        
 
         private void rbtSaveFile_Click(object sender, EventArgs e)
         {
