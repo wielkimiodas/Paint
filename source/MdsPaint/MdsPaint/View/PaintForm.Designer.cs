@@ -31,7 +31,6 @@ namespace MdsPaint.View
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PaintForm));
-            this.ribbon = new System.Windows.Forms.Ribbon();
             this.ribbonOrbMenuItemNew = new System.Windows.Forms.RibbonOrbMenuItem();
             this.ribbonOrbMenuItemSave = new System.Windows.Forms.RibbonOrbMenuItem();
             this.ribbonOrbMenuItemExit = new System.Windows.Forms.RibbonOrbMenuItem();
@@ -41,6 +40,11 @@ namespace MdsPaint.View
             this.ribbonPanelColorPicking = new System.Windows.Forms.RibbonPanel();
             this.ribbonColorChooserBorder = new System.Windows.Forms.RibbonColorChooser();
             this.ribbonColorChooserFilling = new System.Windows.Forms.RibbonColorChooser();
+            this.ribbonComboBoxFillingStyle = new System.Windows.Forms.RibbonComboBox();
+            this.rlNone = new System.Windows.Forms.RibbonLabel();
+            this.rlCross = new System.Windows.Forms.RibbonLabel();
+            this.rlChess = new System.Windows.Forms.RibbonLabel();
+            this.rlDots = new System.Windows.Forms.RibbonLabel();
             this.ribbonPanelShapes = new System.Windows.Forms.RibbonPanel();
             this.ribbonButtonList1 = new System.Windows.Forms.RibbonButtonList();
             this.rbShapeEllipse = new System.Windows.Forms.RibbonButton();
@@ -54,8 +58,9 @@ namespace MdsPaint.View
             this.rbThicknessWide = new System.Windows.Forms.RibbonButton();
             this.ribbonSeparator1 = new System.Windows.Forms.RibbonSeparator();
             this.ribbonButtonList2 = new System.Windows.Forms.RibbonButtonList();
-            this.ribbonButton3 = new System.Windows.Forms.RibbonButton();
-            this.ribbonButton4 = new System.Windows.Forms.RibbonButton();
+            this.rbDash = new System.Windows.Forms.RibbonButton();
+            this.rbSolid = new System.Windows.Forms.RibbonButton();
+            this.rbDotted = new System.Windows.Forms.RibbonButton();
             this.ribbonTabPlugins = new System.Windows.Forms.RibbonTab();
             this.ribbonPanelPlugins = new System.Windows.Forms.RibbonPanel();
             this.ribbonButtonPlugins = new System.Windows.Forms.RibbonButton();
@@ -71,42 +76,12 @@ namespace MdsPaint.View
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.panelPaintContainer = new System.Windows.Forms.Panel();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
-            this.ribbonCheckBoxFilling = new System.Windows.Forms.RibbonCheckBox();
+            this.ribbon = new System.Windows.Forms.Ribbon();
+            this.rlShingles = new System.Windows.Forms.RibbonLabel();
             this.paintingArea = new MdsPaint.MdsPanel();
             this.statusStrip.SuspendLayout();
             this.panelPaintContainer.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // ribbon
-            // 
-            this.ribbon.Font = new System.Drawing.Font("Segoe UI", 11.25F);
-            this.ribbon.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.Minimized = false;
-            this.ribbon.Name = "ribbon";
-            // 
-            // 
-            // 
-            this.ribbon.OrbDropDown.BorderRoundness = 8;
-            this.ribbon.OrbDropDown.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.OrbDropDown.MenuItems.Add(this.ribbonOrbMenuItemNew);
-            this.ribbon.OrbDropDown.MenuItems.Add(this.ribbonOrbMenuItemSave);
-            this.ribbon.OrbDropDown.MenuItems.Add(this.ribbonOrbMenuItemExit);
-            this.ribbon.OrbDropDown.Name = "";
-            this.ribbon.OrbDropDown.Size = new System.Drawing.Size(527, 204);
-            this.ribbon.OrbDropDown.TabIndex = 0;
-            this.ribbon.OrbImage = global::MdsPaint.Properties.Resources.Paint1;
-            // 
-            // 
-            // 
-            this.ribbon.QuickAcessToolbar.Items.Add(this.ribbonButtonUndo);
-            this.ribbon.QuickAcessToolbar.Items.Add(this.ribbonButtonRedo);
-            this.ribbon.Size = new System.Drawing.Size(810, 155);
-            this.ribbon.TabIndex = 1;
-            this.ribbon.Tabs.Add(this.ribbonTabDrawing);
-            this.ribbon.Tabs.Add(this.ribbonTabPlugins);
-            this.ribbon.Tabs.Add(this.ribbonTabActions);
-            this.ribbon.TabsMargin = new System.Windows.Forms.Padding(12, 26, 20, 0);
-            this.ribbon.Text = "ribbon1";
             // 
             // ribbonOrbMenuItemNew
             // 
@@ -157,7 +132,7 @@ namespace MdsPaint.View
             // 
             this.ribbonPanelColorPicking.Items.Add(this.ribbonColorChooserBorder);
             this.ribbonPanelColorPicking.Items.Add(this.ribbonColorChooserFilling);
-            this.ribbonPanelColorPicking.Items.Add(this.ribbonCheckBoxFilling);
+            this.ribbonPanelColorPicking.Items.Add(this.ribbonComboBoxFillingStyle);
             this.ribbonPanelColorPicking.Text = "Colors";
             // 
             // ribbonColorChooserBorder
@@ -172,12 +147,44 @@ namespace MdsPaint.View
             // ribbonColorChooserFilling
             // 
             this.ribbonColorChooserFilling.CheckOnClick = true;
-            this.ribbonColorChooserFilling.Color = System.Drawing.Color.Transparent;
+            this.ribbonColorChooserFilling.Color = System.Drawing.Color.LimeGreen;
             this.ribbonColorChooserFilling.Image = ((System.Drawing.Image)(resources.GetObject("ribbonColorChooserFilling.Image")));
             this.ribbonColorChooserFilling.ImageColorHeight = 20;
             this.ribbonColorChooserFilling.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonColorChooserFilling.SmallImage")));
             this.ribbonColorChooserFilling.Text = "Filling";
             this.ribbonColorChooserFilling.Click += new System.EventHandler(this.ribbonColorChooserFilling_Click);
+            // 
+            // ribbonComboBoxFillingStyle
+            // 
+            this.ribbonComboBoxFillingStyle.AllowTextEdit = false;
+            this.ribbonComboBoxFillingStyle.DropDownItems.Add(this.rlNone);
+            this.ribbonComboBoxFillingStyle.DropDownItems.Add(this.rlCross);
+            this.ribbonComboBoxFillingStyle.DropDownItems.Add(this.rlChess);
+            this.ribbonComboBoxFillingStyle.DropDownItems.Add(this.rlDots);
+            this.ribbonComboBoxFillingStyle.DropDownItems.Add(this.rlShingles);
+            this.ribbonComboBoxFillingStyle.Text = "";
+            this.ribbonComboBoxFillingStyle.TextBoxText = "None";
+            this.ribbonComboBoxFillingStyle.DropDownItemClicked += new System.Windows.Forms.RibbonComboBox.RibbonItemEventHandler(this.ribbonComboBoxFillingStyle_DropDownItemClicked);
+            // 
+            // rlNone
+            // 
+            this.rlNone.Text = "None";
+            this.rlNone.Value = "0";
+            // 
+            // rlCross
+            // 
+            this.rlCross.Text = "Crosses";
+            this.rlCross.Value = "1";
+            // 
+            // rlChess
+            // 
+            this.rlChess.Text = "Chess";
+            this.rlChess.Value = "2";
+            // 
+            // rlDots
+            // 
+            this.rlDots.Text = "Dots";
+            this.rlDots.Value = "3";
             // 
             // ribbonPanelShapes
             // 
@@ -264,24 +271,34 @@ namespace MdsPaint.View
             // 
             // ribbonButtonList2
             // 
-            this.ribbonButtonList2.Buttons.Add(this.ribbonButton3);
-            this.ribbonButtonList2.Buttons.Add(this.ribbonButton4);
+            this.ribbonButtonList2.Buttons.Add(this.rbDash);
+            this.ribbonButtonList2.Buttons.Add(this.rbSolid);
+            this.ribbonButtonList2.Buttons.Add(this.rbDotted);
             this.ribbonButtonList2.ButtonsSizeMode = System.Windows.Forms.RibbonElementSizeMode.Large;
             this.ribbonButtonList2.FlowToBottom = false;
             this.ribbonButtonList2.ItemsSizeInDropwDownMode = new System.Drawing.Size(7, 5);
             this.ribbonButtonList2.Text = "ribbonButtonList2";
             // 
-            // ribbonButton3
+            // rbDash
             // 
-            this.ribbonButton3.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButton3.Image")));
-            this.ribbonButton3.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton3.SmallImage")));
-            this.ribbonButton3.Text = "ribbonButton3";
+            this.rbDash.Image = global::MdsPaint.Properties.Resources._1394593294_border_color;
+            this.rbDash.SmallImage = global::MdsPaint.Properties.Resources._1394593294_border_color;
+            this.rbDash.Text = "";
+            this.rbDash.Click += new System.EventHandler(this.rbDash_Click);
             // 
-            // ribbonButton4
+            // rbSolid
             // 
-            this.ribbonButton4.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButton4.Image")));
-            this.ribbonButton4.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton4.SmallImage")));
-            this.ribbonButton4.Text = "ribbonButton4";
+            this.rbSolid.Image = global::MdsPaint.Properties.Resources._1394593294_border_color1;
+            this.rbSolid.SmallImage = ((System.Drawing.Image)(resources.GetObject("rbSolid.SmallImage")));
+            this.rbSolid.Text = "";
+            this.rbSolid.Click += new System.EventHandler(this.rbSolid_Click);
+            // 
+            // rbDotted
+            // 
+            this.rbDotted.Image = global::MdsPaint.Properties.Resources.border_color_dot;
+            this.rbDotted.SmallImage = ((System.Drawing.Image)(resources.GetObject("rbDotted.SmallImage")));
+            this.rbDotted.Text = "";
+            this.rbDotted.Click += new System.EventHandler(this.rbDotted_Click);
             // 
             // ribbonTabPlugins
             // 
@@ -386,10 +403,45 @@ namespace MdsPaint.View
             this.panelPaintContainer.TabIndex = 4;
             this.panelPaintContainer.MouseEnter += new System.EventHandler(this.panelPaintContainer_MouseEnter);
             // 
-            // ribbonCheckBoxFilling
+            // ribbon
             // 
-            this.ribbonCheckBoxFilling.MinSizeMode = System.Windows.Forms.RibbonElementSizeMode.Large;
-            this.ribbonCheckBoxFilling.Text = "Fill";
+            this.ribbon.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.ribbon.Font = new System.Drawing.Font("Segoe UI", 11.25F);
+            this.ribbon.Location = new System.Drawing.Point(0, 0);
+            this.ribbon.Minimized = false;
+            this.ribbon.Name = "ribbon";
+            // 
+            // 
+            // 
+            this.ribbon.OrbDropDown.BorderRoundness = 8;
+            this.ribbon.OrbDropDown.Location = new System.Drawing.Point(0, 0);
+            this.ribbon.OrbDropDown.MenuItems.Add(this.ribbonOrbMenuItemNew);
+            this.ribbon.OrbDropDown.MenuItems.Add(this.ribbonOrbMenuItemSave);
+            this.ribbon.OrbDropDown.MenuItems.Add(this.ribbonOrbMenuItemExit);
+            this.ribbon.OrbDropDown.Name = "";
+            this.ribbon.OrbDropDown.Size = new System.Drawing.Size(527, 210);
+            this.ribbon.OrbDropDown.TabIndex = 0;
+            this.ribbon.OrbImage = global::MdsPaint.Properties.Resources.Paint_glyph;
+            this.ribbon.OrbStyle = System.Windows.Forms.RibbonOrbStyle.Office_2010;
+            // 
+            // 
+            // 
+            this.ribbon.QuickAcessToolbar.Items.Add(this.ribbonButtonUndo);
+            this.ribbon.QuickAcessToolbar.Items.Add(this.ribbonButtonRedo);
+            this.ribbon.RibbonTabFont = new System.Drawing.Font("Trebuchet MS", 9F);
+            this.ribbon.Size = new System.Drawing.Size(810, 155);
+            this.ribbon.TabIndex = 1;
+            this.ribbon.Tabs.Add(this.ribbonTabDrawing);
+            this.ribbon.Tabs.Add(this.ribbonTabPlugins);
+            this.ribbon.Tabs.Add(this.ribbonTabActions);
+            this.ribbon.TabsMargin = new System.Windows.Forms.Padding(12, 26, 20, 0);
+            this.ribbon.Text = "ribbon1";
+            this.ribbon.ThemeColor = System.Windows.Forms.RibbonTheme.Blue;
+            // 
+            // rlShingles
+            // 
+            this.rlShingles.Text = "Shingles";
+            this.rlShingles.Value = "4";
             // 
             // paintingArea
             // 
@@ -414,8 +466,11 @@ namespace MdsPaint.View
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.ribbon);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "PaintForm";
             this.Text = "Mds paint";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PaintForm_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PaintForm_KeyUp);
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
             this.panelPaintContainer.ResumeLayout(false);
@@ -426,7 +481,6 @@ namespace MdsPaint.View
 
         #endregion
 
-        private System.Windows.Forms.Ribbon ribbon;
         private System.Windows.Forms.RibbonTab ribbonTabPlugins;
         private System.Windows.Forms.RibbonPanel ribbonPanelPlugins;
         private System.Windows.Forms.RibbonButton ribbonButtonPlugins;
@@ -464,10 +518,17 @@ namespace MdsPaint.View
         private RibbonButton ribbonButton7;
         private RibbonSeparator ribbonSeparator1;
         private RibbonButtonList ribbonButtonList2;
-        private RibbonButton ribbonButton3;
-        private RibbonButton ribbonButton4;
+        private RibbonButton rbDash;
+        private RibbonButton rbSolid;
         private RibbonColorChooser ribbonColorChooserFilling;
-        private RibbonCheckBox ribbonCheckBoxFilling;
+        private Ribbon ribbon;
+        private RibbonButton rbDotted;
+        private RibbonComboBox ribbonComboBoxFillingStyle;
+        private RibbonLabel rlNone;
+        private RibbonLabel rlCross;
+        private RibbonLabel rlDots;
+        private RibbonLabel rlChess;
+        private RibbonLabel rlShingles;
     }
 }
 

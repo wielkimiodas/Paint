@@ -9,15 +9,24 @@ namespace MdsPaint.Shapes
 {
     class MdsRect : Shape
     {
-        public override void Draw(Bitmap bmp, Pen pen, Point start, Point end)
+        public override void Draw(Bitmap bmp, Pen pen, Point start, Point end, bool isCanonical)
         {
             using (var gfx = Graphics.FromImage(bmp))
             {
-                var rect = GetRectangle(start, end);
-                //pen.DashStyle = DashStyle.Dot;
-                pen.Width = 5;
+                var rect = GetRectangle(start, end,isCanonical);
+                //pen.DashStyle = DashStyle.Dot;                
                 if (rect.Width > 0 && rect.Height > 0)
                     gfx.DrawRectangle(pen, rect);
+            }
+        }
+
+        public override void Fill(Bitmap bmp, Brush brush, Point start, Point end, bool isCanonical)
+        {
+            using (var gfx = Graphics.FromImage(bmp))
+            {
+                var rect = GetRectangle(start, end, isCanonical);
+                if (rect.Width > 0 && rect.Height > 0)
+                    gfx.FillRectangle(brush, rect);                
             }
         }
     }

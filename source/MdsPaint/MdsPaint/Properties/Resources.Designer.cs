@@ -63,6 +63,26 @@ namespace MdsPaint.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _1394593294_border_color {
+            get {
+                object obj = ResourceManager.GetObject("1394593294_border_color", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _1394593294_border_color1 {
+            get {
+                object obj = ResourceManager.GetObject("1394593294_border_color1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _14_ellipse {
             get {
                 object obj = ResourceManager.GetObject("14_ellipse", resourceCulture);
@@ -132,6 +152,16 @@ namespace MdsPaint.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap border_color_dot {
+            get {
+                object obj = ResourceManager.GetObject("border_color_dot", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ellipse_stroked {
             get {
                 object obj = ResourceManager.GetObject("ellipse_stroked", resourceCulture);
@@ -155,6 +185,16 @@ namespace MdsPaint.Properties {
         internal static System.Drawing.Bitmap Paint {
             get {
                 object obj = ResourceManager.GetObject("Paint", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Paint_glyph {
+            get {
+                object obj = ResourceManager.GetObject("Paint_glyph", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
