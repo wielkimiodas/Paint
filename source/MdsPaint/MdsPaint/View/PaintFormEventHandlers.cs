@@ -126,7 +126,7 @@ namespace MdsPaint.View
             }
             if (e.KeyData == (Keys.Control | Keys.Y))
             {
-                MessageBox.Show("Powtórz");
+                //MessageBox.Show("Powtórz");
             }
         }
     }

@@ -54,7 +54,6 @@ namespace MdsPaint.View
                 //graphics.FillRectangle(Brushes.Crimson, 60, 60, 70, 90);
                 //graphics.FillRectangle(Brushes.Yellow, 0, 60, 10, 70);
             }
-
             OverwritePanel(MainBitmap);
             AddToHistory(MainBitmap);
         }
@@ -95,9 +94,9 @@ namespace MdsPaint.View
                     }
                 }
             }
-            MainBitmap = newbmp;
-            _oldBmp = newbmp;
-            paintingArea.Refresh();
+
+            OverwritePanel(newbmp);
+            AddToHistory(newbmp);            
         }
 
         private void ImportPlugins()
@@ -123,10 +122,12 @@ namespace MdsPaint.View
 
         public void OverwritePanel(Bitmap bmp)
         {
+          if (bmp != null)
+          {
             MainBitmap = bmp;
             paintingArea.Size = MainBitmap.Size;
             paintingArea.Refresh();
-            
+          }
         }
 
         public void EnableRibbon(bool enabled)
