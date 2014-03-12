@@ -50,18 +50,11 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Design" />
     <Reference Include="System.Windows.Forms.Ribbon35">
       <HintPath>..\..\..\contrib\Ribbon\System.Windows.Forms.Ribbon35.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MdsPanel.cs">
@@ -74,7 +67,7 @@
     <Compile Include="Shapes\MdsEllipse.cs" />
     <Compile Include="Shapes\MdsLine.cs" />
     <Compile Include="Shapes\MdsRect.cs" />
-    <Compile Include="Shapes\MdsShape.cs" />
+    <Compile Include="Shapes\MdsShapeBase.cs" />
     <Compile Include="Utils\ExtensionMethods.cs" />
     <Compile Include="Utils\FileUtils.cs" />
     <Compile Include="Utils\PickBox.cs" />

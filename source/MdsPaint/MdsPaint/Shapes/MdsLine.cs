@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace MdsPaint.Shapes
 {
-    public class MdsLine : MdsShape
+    public class MdsLine : MdsShapeBase
     {
         public override void Draw(Bitmap bmp, Pen pen, Point start, Point end, bool isCanonical)
         {
@@ -27,7 +23,7 @@ namespace MdsPaint.Shapes
                 if (isCanonical)
                     end = GetCanonicalPoint(start, end);
 
-                gfx.DrawLine(new Pen(brush){Width = 3}, start, end);
+                gfx.DrawLine(new Pen(brush) {Width = 3}, start, end);
             }
         }
 

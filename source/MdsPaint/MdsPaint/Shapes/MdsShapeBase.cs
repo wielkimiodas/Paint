@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 
 namespace MdsPaint.Shapes
 {
-    public abstract class MdsShape
+    public abstract class MdsShapeBase
     {
         public abstract void Draw(Bitmap bmp, Pen pen, Point start, Point end, bool isCanonical);
         public abstract void Fill(Bitmap bmp, Brush brush, Point start, Point end, bool isCanonical);
@@ -26,7 +23,7 @@ namespace MdsPaint.Shapes
                 {
                     y -= tmp;
                 }
-                
+
                 return new Rectangle(x, y, tmp, tmp);
             }
             else
@@ -37,9 +34,6 @@ namespace MdsPaint.Shapes
                 int height = Math.Abs(start.Y - end.Y);
                 return new Rectangle(x, y, width, height);
             }
-                
-            
         }
     }
 }
-

@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.OleDb;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
-using System.Windows.Forms.RibbonHelpers;
-using System.Windows.Forms.VisualStyles;
 using MdsPaint.PluginManagment;
 using MdsPaint.Shapes;
 using MdsPaint.Utils;
@@ -15,7 +12,7 @@ namespace MdsPaint.View
 {
     public sealed partial class PaintForm : Form
     {
-        private MdsShape _currentMdsShape = new MdsRect();
+        private MdsShapeBase _currentMdsShape = new MdsRect();
         private readonly Pen _pen = new Pen(Color.Black);
         private Color _currentFillingColor = Color.LimeGreen;
         private Brush _currentFillingBrush;
@@ -96,7 +93,7 @@ namespace MdsPaint.View
             }
 
             OverwritePanel(newbmp);
-            AddToHistory(newbmp);            
+            AddToHistory(newbmp);
         }
 
         private void ImportPlugins()
@@ -122,12 +119,12 @@ namespace MdsPaint.View
 
         public void OverwritePanel(Bitmap bmp)
         {
-          if (bmp != null)
-          {
-            MainBitmap = bmp;
-            paintingArea.Size = MainBitmap.Size;
-            paintingArea.Refresh();
-          }
+            if (bmp != null)
+            {
+                MainBitmap = bmp;
+                paintingArea.Size = MainBitmap.Size;
+                paintingArea.Refresh();
+            }
         }
 
         public void EnableRibbon(bool enabled)
@@ -166,7 +163,6 @@ namespace MdsPaint.View
 
             e.Graphics.DrawImageUnscaled(MainBitmap, Point.Empty);
             MainBitmap = (Bitmap) _oldBmp.Clone();
-            
         }
 
 
@@ -217,7 +213,7 @@ namespace MdsPaint.View
         {
             StatusLogger.LogLocation(this, null);
         }
-        
+
         private void UpdateBrush()
         {
             switch (ribbonComboBoxFillingStyle.SelectedValue)

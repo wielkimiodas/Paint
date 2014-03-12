@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace MdsPaint.Utils
@@ -15,6 +12,7 @@ namespace MdsPaint.Utils
     public class PickBox
     {
         public delegate void PropertyChangeHandler(object sender, ResizeEventArgs data);
+
         public event PropertyChangeHandler PropertyChange;
         private const int BoxSize = 8;
         private readonly Color _boxColor = Color.White;
@@ -26,7 +24,7 @@ namespace MdsPaint.Utils
         private Cursor oldCursor;
         public Size Size { get; set; }
         private const int MIN_SIZE = 20;
-        
+
         // The method which fires the Event
         protected void OnPropertyChange(object sender, ResizeEventArgs data)
         {
@@ -79,7 +77,7 @@ namespace MdsPaint.Utils
                 _mControl.Cursor = oldCursor;
                 _mControl = null;
             }
-            _mControl = (Control)sender;
+            _mControl = (Control) sender;
             //Add sizing handles to Control's container (Form or PictureBox)
             _mControl.Parent.Controls.Add(_lbl);
             _lbl.BringToFront();
@@ -115,7 +113,7 @@ namespace MdsPaint.Utils
             int sY = _mControl.Top - BoxSize;
             int sW = _mControl.Width + BoxSize;
             int sH = _mControl.Height + BoxSize;
-            int hB = BoxSize / 2;
+            int hB = BoxSize/2;
             int posX = sX + sW - hB;
             int posY = sY + sH - hB;
             _lbl.SetBounds(posX, posY, BoxSize, BoxSize);
@@ -139,15 +137,15 @@ namespace MdsPaint.Utils
             int h = _mControl.Height;
             if (dragging)
             {
-                switch (((Label)sender).TabIndex)
+                switch (((Label) sender).TabIndex)
                 {
                     case 4: // Dragging right-bottom sizing box
                         w = startw + e.X > MIN_SIZE ? startw + e.X : MIN_SIZE;
                         h = starth + e.Y > MIN_SIZE ? starth + e.Y : MIN_SIZE;
                         break;
                 }
-            //    l = (l < 0) ? 0 : l;
-              //  t = (t < 0) ? 0 : t;
+                //    l = (l < 0) ? 0 : l;
+                //  t = (t < 0) ? 0 : t;
                 _mControl.SetBounds(3, 3, w, h);
             }
         }
@@ -160,7 +158,7 @@ namespace MdsPaint.Utils
             dragging = false;
             MoveHandles();
             ShowHandles();
-            OnPropertyChange(this,new ResizeEventArgs(){NewSize = new Size(_mControl.Width,_mControl.Height)});
+            OnPropertyChange(this, new ResizeEventArgs() {NewSize = new Size(_mControl.Width, _mControl.Height)});
         }
     }
 }

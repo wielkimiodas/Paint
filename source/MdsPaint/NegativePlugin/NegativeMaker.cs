@@ -36,7 +36,7 @@ namespace NegativePlugin
                 {
                     var c = tempBmp.GetPixel(i, j);
                     c = Color.FromArgb(255 - c.R, 255 - c.G, 255 - c.B);
-                    tempBmp.SetPixel(i,j,c);
+                    tempBmp.SetPixel(i, j, c);
                 }
             }
             return tempBmp;

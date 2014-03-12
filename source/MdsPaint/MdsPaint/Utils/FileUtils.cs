@@ -2,7 +2,6 @@
 using System.Drawing.Imaging;
 using System.Windows.Forms;
 using MdsPaint.Properties;
-using MdsPaint.View;
 
 namespace MdsPaint.Utils
 {

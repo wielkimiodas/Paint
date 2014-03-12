@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
+﻿using System.Drawing;
 
 namespace MdsPaint.Shapes
 {
-    class MdsRect : MdsShape
+    internal class MdsRect : MdsShapeBase
     {
         public override void Draw(Bitmap bmp, Pen pen, Point start, Point end, bool isCanonical)
         {
             using (var gfx = Graphics.FromImage(bmp))
             {
-                var rect = GetRectangle(start, end,isCanonical);
+                var rect = GetRectangle(start, end, isCanonical);
                 if (rect.Width > 0 && rect.Height > 0)
                     gfx.DrawRectangle(pen, rect);
             }
@@ -25,7 +20,7 @@ namespace MdsPaint.Shapes
             {
                 var rect = GetRectangle(start, end, isCanonical);
                 if (rect.Width > 0 && rect.Height > 0)
-                    gfx.FillRectangle(brush, rect);                
+                    gfx.FillRectangle(brush, rect);
             }
         }
     }
