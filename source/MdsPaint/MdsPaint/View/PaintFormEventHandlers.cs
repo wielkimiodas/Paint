@@ -13,16 +13,6 @@ namespace MdsPaint.View
             Close();
         }
 
-        private void rbtLoadFile_Click(object sender, EventArgs e)
-        {
-            OverwritePanel(FileUtils.LoadImageFile());
-        }
-
-        private void rbtSaveFile_Click(object sender, EventArgs e)
-        {
-            FileUtils.SaveBmpFile(MainBitmap);
-        }
-
         private void ribbonButtonPlugins_Click(object sender, EventArgs e)
         {
             ImportPlugins();
@@ -89,7 +79,9 @@ namespace MdsPaint.View
 
         private void ribbonOrbMenuItemLoad_Click(object sender, EventArgs e)
         {
-            OverwritePanel(FileUtils.LoadImageFile());
+            var newbmp = FileUtils.LoadImageFile();
+            OverwritePanel(newbmp);
+            AddToHistory(newbmp);
         }
 
         private void rbShapeLine_Click(object sender, EventArgs e)
