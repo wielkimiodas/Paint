@@ -32,10 +32,19 @@ namespace MdsPaint.View
         public PaintForm()
         {
             InitializeComponent();
-            //ribbon.OrbDropDown.rece
             statusStrip.BringToFront();
             DoubleBuffered = true;
             SetStyle(ControlStyles.ResizeRedraw, false);
+
+            var pb = new PickBox();
+            pb.WireControl(paintingArea);
+            pb.PropertyChange += pb_PropertyChange;
+
+            InitNewBitmap();
+        }
+
+        private void InitNewBitmap()
+        {
             MainBitmap = new Bitmap(_initialMainBitmapSize.Width, _initialMainBitmapSize.Height);
             using (var graphics = Graphics.FromImage(MainBitmap))
             {
@@ -45,9 +54,7 @@ namespace MdsPaint.View
                 graphics.FillRectangle(Brushes.Yellow, 0, 60, 10, 70);
             }
 
-            var pb = new PickBox();
-            pb.WireControl(paintingArea);
-            pb.PropertyChange += pb_PropertyChange;
+
             paintingArea.Size = MainBitmap.Size;
             paintingArea.Refresh();
             _oldBmp = MainBitmap;
@@ -292,5 +299,26 @@ namespace MdsPaint.View
         {
             UpdateBrush();
         }
+
+        private void ribbonOrbMenuItemNew_Click(object sender, EventArgs e)
+        {
+            InitNewBitmap();
+        }
+
+        private void ribbonOrbMenuItemSave_Click(object sender, EventArgs e)
+        {
+            FileUtils.SaveBmpFile(MainBitmap);
+        }
+
+        private void ribbonOrbMenuItemLoad_Click(object sender, EventArgs e)
+        {
+            OverwritePanel(FileUtils.LoadImageFile());
+        }
+
+        private void rbShapeLine_Click(object sender, EventArgs e)
+        {
+            _currentMdsShape = new MdsLine();
+        }
+
     }
 }

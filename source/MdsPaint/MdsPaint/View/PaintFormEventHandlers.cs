@@ -13,8 +13,7 @@ namespace MdsPaint.View
 
         private void rbtLoadFile_Click(object sender, EventArgs e)
         {
-            var bmp = FileUtils.LoadImageFile();
-            OverwritePanel(bmp);
+            OverwritePanel(FileUtils.LoadImageFile());
         }
 
         

@@ -14,7 +14,6 @@ namespace MdsPaint.Shapes
             using (var gfx = Graphics.FromImage(bmp))
             {
                 var rect = GetRectangle(start, end,isCanonical);
-                //pen.DashStyle = DashStyle.Dot;                
                 if (rect.Width > 0 && rect.Height > 0)
                     gfx.DrawRectangle(pen, rect);
             }

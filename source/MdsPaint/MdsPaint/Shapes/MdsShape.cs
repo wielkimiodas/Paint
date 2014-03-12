@@ -13,16 +13,19 @@ namespace MdsPaint.Shapes
 
         protected static Rectangle GetRectangle(Point start, Point end, bool isCanonical)
         {
-            
-
             if (isCanonical)
             {
-                int x = Math.Min(start.X, end.X);
-                int y = Math.Min(start.Y, end.Y);
-                
-                int width = Math.Abs(start.X - end.X);
-                int height = Math.Abs(start.Y - end.Y);
-                var tmp = Math.Max(width, height);
+                var tmp = Math.Max(Math.Abs(start.X - end.X), Math.Abs(start.Y - end.Y));
+                int x = start.X;
+                int y = start.Y;
+                if (start.X > end.X)
+                {
+                    x -= tmp;
+                }
+                if (start.Y > end.Y)
+                {
+                    y -= tmp;
+                }
                 
                 return new Rectangle(x, y, tmp, tmp);
             }
@@ -39,3 +42,4 @@ namespace MdsPaint.Shapes
         }
     }
 }
+

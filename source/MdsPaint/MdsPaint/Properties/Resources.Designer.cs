@@ -212,6 +212,26 @@ namespace MdsPaint.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap strokeLine {
+            get {
+                object obj = ResourceManager.GetObject("strokeLine", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap strokeLinesmall {
+            get {
+                object obj = ResourceManager.GetObject("strokeLinesmall", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap thin {
             get {
                 object obj = ResourceManager.GetObject("thin", resourceCulture);
