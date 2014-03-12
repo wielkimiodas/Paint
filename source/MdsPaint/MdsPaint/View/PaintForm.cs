@@ -49,15 +49,15 @@ namespace MdsPaint.View
             using (var graphics = Graphics.FromImage(MainBitmap))
             {
                 graphics.FillRectangle(Brushes.White, 0, 0, MainBitmap.Width, MainBitmap.Height);
-                graphics.FillEllipse(Brushes.Aqua, 0, 0, 50, 50);
-                graphics.FillRectangle(Brushes.Crimson, 60, 60, 70, 90);
-                graphics.FillRectangle(Brushes.Yellow, 0, 60, 10, 70);
+                //graphics.FillEllipse(Brushes.Aqua, 0, 0, 50, 50);
+                //graphics.FillRectangle(Brushes.Crimson, 60, 60, 70, 90);
+                //graphics.FillRectangle(Brushes.Yellow, 0, 60, 10, 70);
             }
 
-
-            paintingArea.Size = MainBitmap.Size;
-            paintingArea.Refresh();
-            _oldBmp = MainBitmap;
+            OverwritePanel(MainBitmap);
+            //paintingArea.Size = MainBitmap.Size;
+            //paintingArea.Refresh();
+            //_oldBmp = MainBitmap;
         }
 
         private void pb_PropertyChange(object sender, ResizeEventArgs data)
@@ -318,6 +318,15 @@ namespace MdsPaint.View
         private void rbShapeLine_Click(object sender, EventArgs e)
         {
             _currentMdsShape = new MdsLine();
+        }
+
+        private About aboutDialog;
+        private void ribbonOrbMenuItemAbout_Click(object sender, EventArgs e)
+        {
+            if(aboutDialog==null)
+                aboutDialog = new About();
+            aboutDialog.StartPosition = FormStartPosition.CenterParent;
+            aboutDialog.ShowDialog();
         }
 
     }
