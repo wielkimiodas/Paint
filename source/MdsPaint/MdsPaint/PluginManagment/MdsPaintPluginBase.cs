@@ -41,11 +41,12 @@ namespace MdsPaint.PluginManagment
 
         public static void BtnAction(MdsPaintPluginBase plugin)
         {
-            var res = plugin.ProcessBitmap(plugin.PaintFormPointer.MainBitmap);
-            var changeImgAction = new Action(() => plugin.PaintFormPointer.OverwritePanel(res));
+            var processedBitmap = plugin.ProcessBitmap(plugin.PaintFormPointer.MainBitmap);
+            var changeImgAction = new Action(() => plugin.PaintFormPointer.OverwritePanel(processedBitmap));
 
             var asyncImgChange = plugin.PaintFormPointer.BeginInvoke(changeImgAction);
             plugin.PaintFormPointer.EndInvoke(asyncImgChange);
+            plugin.PaintFormPointer.AddToHistory(processedBitmap);
             plugin.PaintFormPointer.EnableRibbon(true);
         }
     }

@@ -6,6 +6,7 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.RibbonHelpers;
+using System.Windows.Forms.VisualStyles;
 using MdsPaint.PluginManagment;
 using MdsPaint.Shapes;
 using MdsPaint.Utils;
@@ -55,9 +56,27 @@ namespace MdsPaint.View
             }
 
             OverwritePanel(MainBitmap);
-            //paintingArea.Size = MainBitmap.Size;
-            //paintingArea.Refresh();
-            //_oldBmp = MainBitmap;
+            AddToHistory(MainBitmap);
+        }
+
+        public void AddToHistory(Bitmap bmp)
+        {
+            _history.Push(bmp);
+        }
+
+        public Bitmap PopFromHistory()
+        {
+            Bitmap tmp = null;
+            try
+            {
+                if (_history.Count > 1)
+                    _history.Pop();
+                tmp = _history.Peek();
+            }
+            catch (Exception)
+            {
+            }
+            return tmp ?? MainBitmap;
         }
 
         private void pb_PropertyChange(object sender, ResizeEventArgs data)
@@ -79,14 +98,6 @@ namespace MdsPaint.View
             MainBitmap = newbmp;
             _oldBmp = newbmp;
             paintingArea.Refresh();
-        }
-
-        protected override void OnClosed(EventArgs e)
-        {
-            //var res = MessageBox.Show("Are you sure you want to exit without saving?", "Question",
-            //    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            //if (res == DialogResult.Yes)
-            //    Close();
         }
 
         private void ImportPlugins()
@@ -115,6 +126,7 @@ namespace MdsPaint.View
             MainBitmap = bmp;
             paintingArea.Size = MainBitmap.Size;
             paintingArea.Refresh();
+            
         }
 
         public void EnableRibbon(bool enabled)
@@ -145,14 +157,15 @@ namespace MdsPaint.View
             {
                 UpdateBrush();
                 if (_currentFillingBrush != null)
-                    _currentMdsShape.Fill(MainBitmap, _currentFillingBrush, _startPosition, _currentPosition, _isCanonical);
+                    _currentMdsShape.Fill(MainBitmap, _currentFillingBrush, _startPosition, _currentPosition,
+                        _isCanonical);
                 else
                     _currentMdsShape.Draw(MainBitmap, _pen, _startPosition, _currentPosition, _isCanonical);
             }
 
             e.Graphics.DrawImageUnscaled(MainBitmap, Point.Empty);
             MainBitmap = (Bitmap) _oldBmp.Clone();
-            //   _history.Push(MainBitmap);
+            
         }
 
 
@@ -184,6 +197,7 @@ namespace MdsPaint.View
 
             paintingArea.Invalidate();
             _startPosition = Point.Empty;
+            AddToHistory(MainBitmap);
         }
 
         private void ribbonColorChooser_Click(object sender, EventArgs e)
@@ -202,71 +216,7 @@ namespace MdsPaint.View
         {
             StatusLogger.LogLocation(this, null);
         }
-
-        private void ribbonComboBoxThickness_DropDownItemClicked(object sender, RibbonItemEventArgs e)
-        {
-            _pen.Width = Convert.ToSingle(e.Item.Value);
-        }
-
-        private void rbShapeEllipse_Click(object sender, EventArgs e)
-        {
-            _currentMdsShape = new MdsEllipse();
-        }
-
-        private void rbShapeRectangle_Click(object sender, EventArgs e)
-        {
-            _currentMdsShape = new MdsRect();
-        }
-
-        private void ribbonColorChooserFilling_Click(object sender, EventArgs e)
-        {
-            var res = colorDialog.ShowDialog();
-            if (res == DialogResult.OK)
-            {
-                _currentFillingColor = colorDialog.Color;
-                ribbonColorChooserFilling.Color = colorDialog.Color;
-            }
-        }
-
-        private void rbDash_Click(object sender, EventArgs e)
-        {
-            _pen.DashStyle = DashStyle.Dash;
-        }
-
-        private void rbSolid_Click(object sender, EventArgs e)
-        {
-            _pen.DashStyle = DashStyle.Solid;
-        }
-
-        private void rbDotted_Click(object sender, EventArgs e)
-        {
-            _pen.DashStyle = DashStyle.Dot;
-        }
-
-
-        private void PaintForm_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Shift)
-            {
-                _isCanonical = true;
-                paintingArea.Invalidate();
-            }
-            if (e.KeyData == (Keys.Control | Keys.Z))
-            {
-                MessageBox.Show("Cofnij");
-            }
-            if (e.KeyData == (Keys.Control | Keys.Y))
-            {
-                MessageBox.Show("Powtórz");
-            }
-        }
-
-        private void PaintForm_KeyUp(object sender, KeyEventArgs e)
-        {
-            _isCanonical = false;
-            paintingArea.Invalidate();
-        }
-
+        
         private void UpdateBrush()
         {
             switch (ribbonComboBoxFillingStyle.SelectedValue)
@@ -295,39 +245,10 @@ namespace MdsPaint.View
             }
         }
 
-        private void ribbonComboBoxFillingStyle_DropDownItemClicked(object sender, RibbonItemEventArgs e)
-        {
-            UpdateBrush();
-        }
-
-        private void ribbonOrbMenuItemNew_Click(object sender, EventArgs e)
-        {
-            InitNewBitmap();
-        }
-
-        private void ribbonOrbMenuItemSave_Click(object sender, EventArgs e)
-        {
-            FileUtils.SaveBmpFile(MainBitmap);
-        }
-
-        private void ribbonOrbMenuItemLoad_Click(object sender, EventArgs e)
-        {
-            OverwritePanel(FileUtils.LoadImageFile());
-        }
-
-        private void rbShapeLine_Click(object sender, EventArgs e)
-        {
-            _currentMdsShape = new MdsLine();
-        }
-
-        private About aboutDialog;
         private void ribbonOrbMenuItemAbout_Click(object sender, EventArgs e)
         {
-            if(aboutDialog==null)
-                aboutDialog = new About();
-            aboutDialog.StartPosition = FormStartPosition.CenterParent;
+            var aboutDialog = new About {StartPosition = FormStartPosition.CenterParent};
             aboutDialog.ShowDialog();
         }
-
     }
 }

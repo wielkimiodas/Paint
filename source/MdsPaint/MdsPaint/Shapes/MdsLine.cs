@@ -38,9 +38,7 @@ namespace MdsPaint.Shapes
             int absDistX = Math.Abs(distX);
             int absDistY = Math.Abs(distY);
 
-            var length = Math.Max(absDistX, absDistY);
-
-            Point dest = new Point();
+            var dest = new Point();
             if (absDistX > absDistY)
             {
                 dest.X = end.X;
