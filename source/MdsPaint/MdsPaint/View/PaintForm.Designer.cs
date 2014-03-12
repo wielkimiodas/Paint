@@ -52,7 +52,6 @@ namespace MdsPaint.View
       this.rbShapeEllipse = new System.Windows.Forms.RibbonButton();
       this.rbShapeRectangle = new System.Windows.Forms.RibbonButton();
       this.rbShapeLine = new System.Windows.Forms.RibbonButton();
-      this.ribbonButton7 = new System.Windows.Forms.RibbonButton();
       this.ribbonPanelPenStyles = new System.Windows.Forms.RibbonPanel();
       this.ribbonComboBoxThickness = new System.Windows.Forms.RibbonComboBox();
       this.rbThicknessThin = new System.Windows.Forms.RibbonButton();
@@ -209,7 +208,6 @@ namespace MdsPaint.View
       this.ribbonButtonList1.Buttons.Add(this.rbShapeEllipse);
       this.ribbonButtonList1.Buttons.Add(this.rbShapeRectangle);
       this.ribbonButtonList1.Buttons.Add(this.rbShapeLine);
-      this.ribbonButtonList1.Buttons.Add(this.ribbonButton7);
       this.ribbonButtonList1.ButtonsSizeMode = System.Windows.Forms.RibbonElementSizeMode.Compact;
       this.ribbonButtonList1.FlowToBottom = false;
       this.ribbonButtonList1.ItemsSizeInDropwDownMode = new System.Drawing.Size(7, 5);
@@ -238,12 +236,6 @@ namespace MdsPaint.View
       this.rbShapeLine.SmallImage = global::MdsPaint.Properties.Resources.strokeLinesmall;
       this.rbShapeLine.Text = "";
       this.rbShapeLine.Click += new System.EventHandler(this.rbShapeLine_Click);
-      // 
-      // ribbonButton7
-      // 
-      this.ribbonButton7.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButton7.Image")));
-      this.ribbonButton7.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton7.SmallImage")));
-      this.ribbonButton7.Text = "ribbonButton7";
       // 
       // ribbonPanelPenStyles
       // 
@@ -493,7 +485,6 @@ namespace MdsPaint.View
         private RibbonButton rbShapeEllipse;
         private RibbonButton rbShapeRectangle;
         private RibbonButton rbShapeLine;
-        private RibbonButton ribbonButton7;
         private RibbonSeparator ribbonSeparator1;
         private RibbonButtonList ribbonButtonListPenStyles;
         private RibbonButton rbDash;
