@@ -7,7 +7,7 @@ using System.Text;
 
 namespace MdsPaint.Shapes
 {
-    class MdsRect : Shape
+    class MdsRect : MdsShape
     {
         public override void Draw(Bitmap bmp, Pen pen, Point start, Point end, bool isCanonical)
         {

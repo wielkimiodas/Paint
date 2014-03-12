@@ -6,7 +6,7 @@ using System.Text;
 
 namespace MdsPaint.Shapes
 {
-    public class MdsEllipse : Shape
+    public class MdsEllipse : MdsShape
     {
         public override void Draw(Bitmap bmp, Pen pen, Point start, Point end, bool isCanonical)
         {

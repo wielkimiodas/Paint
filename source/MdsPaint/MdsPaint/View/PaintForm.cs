@@ -14,7 +14,7 @@ namespace MdsPaint.View
 {
     public sealed partial class PaintForm : Form
     {
-        private Shape _currentShape = new MdsRect();
+        private MdsShape _currentMdsShape = new MdsRect();
         private readonly Pen _pen = new Pen(Color.Black);
         private Color _currentFillingColor = Color.LimeGreen;
         private Brush _currentFillingBrush;
@@ -24,6 +24,8 @@ namespace MdsPaint.View
         private bool _drawing;
         private Bitmap _oldBmp;
         private bool _isCanonical;
+        private Point _startPosition;
+        private Point _currentPosition;
 
         private readonly Size _initialMainBitmapSize = new Size(600, 300);
 
@@ -122,7 +124,7 @@ namespace MdsPaint.View
         private void pbPaintingArea_MouseMove(object sender, MouseEventArgs e)
         {
             StatusLogger.LogLocation(this, e.Location);
-            currentPosition = e.Location;
+            _currentPosition = e.Location;
             if (_drawing)
             {
                 paintingArea.Invalidate();
@@ -133,20 +135,23 @@ namespace MdsPaint.View
         {
             _oldBmp = (Bitmap) MainBitmap.Clone();
             if (_drawing)
-                _currentShape.Draw(MainBitmap, _pen, startPosition, currentPosition, _isCanonical);
+            {
+                UpdateBrush();
+                if (_currentFillingBrush != null)
+                    _currentMdsShape.Fill(MainBitmap, _currentFillingBrush, _startPosition, _currentPosition, _isCanonical);
+                else
+                    _currentMdsShape.Draw(MainBitmap, _pen, _startPosition, _currentPosition, _isCanonical);
+            }
 
             e.Graphics.DrawImageUnscaled(MainBitmap, Point.Empty);
             MainBitmap = (Bitmap) _oldBmp.Clone();
             //   _history.Push(MainBitmap);
         }
 
-        private Rectangle currRect;
-        private Point startPosition;
-        private Point currentPosition;
 
         private void paintingArea_MouseDown(object sender, MouseEventArgs e)
         {
-            currentPosition = startPosition = new Point(e.X, e.Y);
+            _currentPosition = _startPosition = new Point(e.X, e.Y);
             _oldBmp = (Bitmap) MainBitmap; //.Clone();
             _drawing = true;
         }
@@ -161,17 +166,17 @@ namespace MdsPaint.View
             if (_currentFillingBrush != null)
             {
                 UpdateBrush();
-                _currentShape.Fill(MainBitmap, _currentFillingBrush, startPosition, currentPosition, _isCanonical);
+                _currentMdsShape.Fill(MainBitmap, _currentFillingBrush, _startPosition, _currentPosition, _isCanonical);
             }
             else
             {
-                _currentShape.Draw(MainBitmap, _pen, startPosition, currentPosition, _isCanonical);
+                _currentMdsShape.Draw(MainBitmap, _pen, _startPosition, _currentPosition, _isCanonical);
             }
 
             _oldBmp = MainBitmap;
 
             paintingArea.Invalidate();
-            startPosition = Point.Empty;
+            _startPosition = Point.Empty;
         }
 
         private void ribbonColorChooser_Click(object sender, EventArgs e)
@@ -198,12 +203,12 @@ namespace MdsPaint.View
 
         private void rbShapeEllipse_Click(object sender, EventArgs e)
         {
-            _currentShape = new MdsEllipse();
+            _currentMdsShape = new MdsEllipse();
         }
 
         private void rbShapeRectangle_Click(object sender, EventArgs e)
         {
-            _currentShape = new MdsRect();
+            _currentMdsShape = new MdsRect();
         }
 
         private void ribbonColorChooserFilling_Click(object sender, EventArgs e)
@@ -239,6 +244,14 @@ namespace MdsPaint.View
                 _isCanonical = true;
                 paintingArea.Invalidate();
             }
+            if (e.KeyData == (Keys.Control | Keys.Z))
+            {
+                MessageBox.Show("Cofnij");
+            }
+            if (e.KeyData == (Keys.Control | Keys.Y))
+            {
+                MessageBox.Show("Powtórz");
+            }
         }
 
         private void PaintForm_KeyUp(object sender, KeyEventArgs e)
@@ -265,6 +278,12 @@ namespace MdsPaint.View
                     break;
                 case "4":
                     _currentFillingBrush = new HatchBrush(HatchStyle.Shingle, _currentFillingColor);
+                    break;
+                case "5":
+                    _currentFillingBrush = new SolidBrush(_currentFillingColor);
+                    break;
+                default:
+                    _currentFillingBrush = null;
                     break;
             }
         }

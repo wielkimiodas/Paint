@@ -73,7 +73,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shapes\MdsEllipse.cs" />
     <Compile Include="Shapes\MdsRect.cs" />
-    <Compile Include="Shapes\Shape.cs" />
+    <Compile Include="Shapes\MdsShape.cs" />
     <Compile Include="Utils\ExtensionMethods.cs" />
     <Compile Include="Utils\FileUtils.cs" />
     <Compile Include="Utils\PickBox.cs" />

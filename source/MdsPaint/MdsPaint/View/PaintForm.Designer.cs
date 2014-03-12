@@ -42,9 +42,11 @@ namespace MdsPaint.View
             this.ribbonColorChooserFilling = new System.Windows.Forms.RibbonColorChooser();
             this.ribbonComboBoxFillingStyle = new System.Windows.Forms.RibbonComboBox();
             this.rlNone = new System.Windows.Forms.RibbonLabel();
+            this.rlSolid = new System.Windows.Forms.RibbonLabel();
             this.rlCross = new System.Windows.Forms.RibbonLabel();
             this.rlChess = new System.Windows.Forms.RibbonLabel();
             this.rlDots = new System.Windows.Forms.RibbonLabel();
+            this.rlShingles = new System.Windows.Forms.RibbonLabel();
             this.ribbonPanelShapes = new System.Windows.Forms.RibbonPanel();
             this.ribbonButtonList1 = new System.Windows.Forms.RibbonButtonList();
             this.rbShapeEllipse = new System.Windows.Forms.RibbonButton();
@@ -75,10 +77,9 @@ namespace MdsPaint.View
             this.toolStripStatusLocationLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.panelPaintContainer = new System.Windows.Forms.Panel();
+            this.paintingArea = new MdsPaint.MdsPanel();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.ribbon = new System.Windows.Forms.Ribbon();
-            this.rlShingles = new System.Windows.Forms.RibbonLabel();
-            this.paintingArea = new MdsPaint.MdsPanel();
             this.statusStrip.SuspendLayout();
             this.panelPaintContainer.SuspendLayout();
             this.SuspendLayout();
@@ -158,6 +159,7 @@ namespace MdsPaint.View
             // 
             this.ribbonComboBoxFillingStyle.AllowTextEdit = false;
             this.ribbonComboBoxFillingStyle.DropDownItems.Add(this.rlNone);
+            this.ribbonComboBoxFillingStyle.DropDownItems.Add(this.rlSolid);
             this.ribbonComboBoxFillingStyle.DropDownItems.Add(this.rlCross);
             this.ribbonComboBoxFillingStyle.DropDownItems.Add(this.rlChess);
             this.ribbonComboBoxFillingStyle.DropDownItems.Add(this.rlDots);
@@ -170,6 +172,11 @@ namespace MdsPaint.View
             // 
             this.rlNone.Text = "None";
             this.rlNone.Value = "0";
+            // 
+            // rlSolid
+            // 
+            this.rlSolid.Text = "Solid";
+            this.rlSolid.Value = "5";
             // 
             // rlCross
             // 
@@ -185,6 +192,11 @@ namespace MdsPaint.View
             // 
             this.rlDots.Text = "Dots";
             this.rlDots.Value = "3";
+            // 
+            // rlShingles
+            // 
+            this.rlShingles.Text = "Shingles";
+            this.rlShingles.Value = "4";
             // 
             // ribbonPanelShapes
             // 
@@ -403,6 +415,19 @@ namespace MdsPaint.View
             this.panelPaintContainer.TabIndex = 4;
             this.panelPaintContainer.MouseEnter += new System.EventHandler(this.panelPaintContainer_MouseEnter);
             // 
+            // paintingArea
+            // 
+            this.paintingArea.BackColor = System.Drawing.Color.White;
+            this.paintingArea.Location = new System.Drawing.Point(3, 3);
+            this.paintingArea.Name = "paintingArea";
+            this.paintingArea.Size = new System.Drawing.Size(281, 223);
+            this.paintingArea.TabIndex = 3;
+            this.paintingArea.Paint += new System.Windows.Forms.PaintEventHandler(this.paintingArea_Paint);
+            this.paintingArea.MouseDown += new System.Windows.Forms.MouseEventHandler(this.paintingArea_MouseDown);
+            this.paintingArea.MouseLeave += new System.EventHandler(this.pbPaintingArea_MouseLeave);
+            this.paintingArea.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbPaintingArea_MouseMove);
+            this.paintingArea.MouseUp += new System.Windows.Forms.MouseEventHandler(this.paintingArea_MouseUp);
+            // 
             // ribbon
             // 
             this.ribbon.BackColor = System.Drawing.SystemColors.InactiveCaption;
@@ -437,24 +462,6 @@ namespace MdsPaint.View
             this.ribbon.TabsMargin = new System.Windows.Forms.Padding(12, 26, 20, 0);
             this.ribbon.Text = "ribbon1";
             this.ribbon.ThemeColor = System.Windows.Forms.RibbonTheme.Blue;
-            // 
-            // rlShingles
-            // 
-            this.rlShingles.Text = "Shingles";
-            this.rlShingles.Value = "4";
-            // 
-            // paintingArea
-            // 
-            this.paintingArea.BackColor = System.Drawing.Color.White;
-            this.paintingArea.Location = new System.Drawing.Point(3, 3);
-            this.paintingArea.Name = "paintingArea";
-            this.paintingArea.Size = new System.Drawing.Size(281, 223);
-            this.paintingArea.TabIndex = 3;
-            this.paintingArea.Paint += new System.Windows.Forms.PaintEventHandler(this.paintingArea_Paint);
-            this.paintingArea.MouseDown += new System.Windows.Forms.MouseEventHandler(this.paintingArea_MouseDown);
-            this.paintingArea.MouseLeave += new System.EventHandler(this.pbPaintingArea_MouseLeave);
-            this.paintingArea.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbPaintingArea_MouseMove);
-            this.paintingArea.MouseUp += new System.Windows.Forms.MouseEventHandler(this.paintingArea_MouseUp);
             // 
             // PaintForm
             // 
@@ -529,6 +536,7 @@ namespace MdsPaint.View
         private RibbonLabel rlDots;
         private RibbonLabel rlChess;
         private RibbonLabel rlShingles;
+        private RibbonLabel rlSolid;
     }
 }
 
