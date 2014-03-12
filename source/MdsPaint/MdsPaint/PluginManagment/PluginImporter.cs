@@ -11,7 +11,8 @@ namespace MdsPaint.PluginManagment
         private CompositionContainer _container;
 
         [ImportMany(typeof (MdsPaintPluginBase))] private IEnumerable<Lazy<MdsPaintPluginBase>> _plugins;
-        private const string LibsPath = @"C:\Users\Wojciech\Documents\studia\mgr\1 semestr\tpal\Paint\plugins";
+        private const string LibsPath = @"C:\temp plugins";
+        //private const string LibsPath = @"C:\Users\Wojciech\Documents\studia\mgr\1 semestr\tpal\Paint\plugins";
 
         public PluginImporter()
         {

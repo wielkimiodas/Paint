@@ -60,7 +60,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetDir)GrayScalePlugin.dll" "C:\Users\Wojciech\Documents\studia\mgr\1 semestr\tpal\Paint\plugins\GrayScalePlugin.dll"</PostBuildEvent>
+    <PostBuildEvent>copy "$(TargetDir)GrayScalePlugin.dll" "C:\temp plugins\GrayScalePlugin.dll"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
