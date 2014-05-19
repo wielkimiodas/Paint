@@ -40,7 +40,7 @@ namespace MirrorImagePlugin
                     tempBitmap.SetPixel(baseBmp.Width - j - 1, i, c);
                 }
             }
-            //Thread.Sleep(5000);
+            System.Threading.Thread.Sleep(5000);
             return tempBitmap;
         }
     }

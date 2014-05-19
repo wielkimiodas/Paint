@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CppProj", "CppProj\CppProj.vcxproj", "{FE2AA2CC-CF24-44EB-B018-0556403DA97C}"
+EndProject
+Global
+	GlobalSection(CodealikeProperties) = postSolution
+		SolutionGuid = 28fd47f3-9d3c-42ab-b52d-a8675cd6aeb7
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE2AA2CC-CF24-44EB-B018-0556403DA97C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FE2AA2CC-CF24-44EB-B018-0556403DA97C}.Debug|Win32.Build.0 = Debug|Win32
+		{FE2AA2CC-CF24-44EB-B018-0556403DA97C}.Release|Win32.ActiveCfg = Release|Win32
+		{FE2AA2CC-CF24-44EB-B018-0556403DA97C}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
