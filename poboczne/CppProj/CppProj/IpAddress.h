@@ -1,3 +1,5 @@
+#ifndef IpAddress_h
+#define IpAddress_h
 #pragma once
 #include<string>
 class IpAddress
@@ -18,3 +20,4 @@ public:
 	std::string toString();
 };
 
+#endif

@@ -1,3 +1,5 @@
+#ifndef IpConfig_h
+#define IpConfig_h
 #pragma once
 #include<string>
 #include "IpAddress.h"
@@ -20,4 +22,6 @@ public:
 	IpAddress * getNetmask();
 	IpAddress * getGateway();
 };
+#endif
+
 

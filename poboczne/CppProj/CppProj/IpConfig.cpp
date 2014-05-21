@@ -13,6 +13,20 @@ IpConfig::~IpConfig(void)
 {
 }
 
+IpAddress * IpConfig::getIpAddress()
+{
+	return &_address;
+}
+
+IpAddress * IpConfig::getNetmask()
+{
+	return &_netmask;
+}
+
+IpAddress * IpConfig::getGateway()
+{
+	return &_gateway;
+}
 
 IpAddress * IpConfig::getNetwork()
 {
