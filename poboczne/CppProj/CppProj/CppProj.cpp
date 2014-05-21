@@ -9,8 +9,8 @@
 #include <fstream>
 using namespace std;
 
-char* readFromFile(char * path);
-void saveToFile(char * path);
+string readFromFile(char * path);
+void saveToFile(string content, char * path);
 void testRegex();
 void testIpAddr();
 void ipConfigTest();
@@ -18,13 +18,15 @@ void configTransformerTest();
 
 
 
+
 int _tmain(int argc, _TCHAR* argv[])
 {
-	//char * text = readFromFile("testFile.txt");
-	//printf("%s",text);
-	//saveToFile("testFileOut.txt");	
+	string text = readFromFile("testFile.txt");
+	cout<<text;
 	
-	configTransformerTest();
+	saveToFile(text, "testFileOut.txt");	
+	
+	//configTransformerTest();
 
 	string s;
 	scanf_s("&s", s);
@@ -35,7 +37,7 @@ void configTransformerTest()
 {
 	std::string dynamicContent =	"auto lo\n\n"
 								"iface lo inet loopback\n"
-								"iface eth0 inet static\n\n"
+								"iface eth0 inet dhcp\n\n"
 
 								"allow-hotplug wlan0\n"
 								"iface wlan0 inet manual\n"
@@ -58,9 +60,9 @@ void configTransformerTest()
 	auto addr = IpAddress::parse("192.168.2.14");
 	auto netmask = IpAddress::parse("255.255.253.0");
 	auto gateway = IpAddress::parse("192.168.2.1");
+	
 	auto ipcfg = new IpConfig(IpAddress(*addr),IpAddress(*netmask),IpAddress(*gateway));
-
-	auto newConfig = ConfigTransformer::ChangeConfigToStatic(staticContent,IpConfig(*ipcfg));
+	auto newConfig = ConfigTransformer::UpdateConfig(dynamicContent,ipcfg);
 	cout<<newConfig;
 }
 
@@ -88,28 +90,17 @@ void testRegex()
 	auto addr = IpAddress::parse(content);
 }
 
-char* readFromFile(char * path)
+std::string readFromFile(char * path)
 {
-	ifstream inFile(path,ios::beg);
-	char * input = NULL;
-	if(inFile.is_open())
-	{
-		streampos fsize = 0;
-		fsize = inFile.tellg();
-		inFile.seekg(0, std::ios::end);
-		fsize = inFile.tellg() - fsize;
-		input = new char[fsize];
-		inFile.seekg (0, ios::beg);
-		inFile.read (input, fsize);
-		inFile.close();
-	}
-	return input;
+	std::ifstream ifs("testFile.txt");
+	std::string content( (std::istreambuf_iterator<char>(ifs) ), (std::istreambuf_iterator<char>()) );
+	return content;
 }
 
-void saveToFile(char * path)
+void saveToFile(string content, char * path)
 {
 	ofstream outFile(path); 
-	outFile<<"mds";
+	outFile<<content;
 	outFile.close();
 }
 

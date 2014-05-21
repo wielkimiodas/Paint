@@ -17,6 +17,22 @@ ConfigTransformer::~ConfigTransformer(void)
 {
 }
 
+string ConfigTransformer::UpdateConfig(string oldConfig, IpConfig * ipConfig)
+{
+	string newConfig;
+
+    if (ipConfig == 0)
+    {
+        newConfig = ChangeConfigToDynamic(oldConfig);
+    }
+    else
+    {
+		newConfig = ChangeConfigToStatic(oldConfig, IpConfig(*ipConfig));
+    }
+
+    return newConfig;
+}
+
 bool ConfigTransformer::IsConfigModeStatic(string config)
 {
 	bool isConfigStatic = false;
